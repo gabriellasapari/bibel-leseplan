@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bibel-Leseplan – 30 Tage mit Jesus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f7f7fb;
+        --card-bg: #ffffff;
+        --accent: #5065a8;
+        --accent-soft: #e0e6ff;
+        --text: #222222;
+        --muted: #666666;
+        --border: #e2e2ee;
+        --radius-lg: 18px;
+        --radius-md: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+
+      header {
+        margin-bottom: 24px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      h1 {
+        margin: 12px 0 4px;
+        font-size: 28px;
+      }
+
+      .subtitle {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .intro-card {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: var(--radius-lg);
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 30px rgba(0, 0, 40, 0.03);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .intro-card strong {
+        font-weight: 600;
+      }
+
+      .layout {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        gap: 18px;
+      }
+
+      @media (max-width: 800px) {
+        .layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 30px rgba(0, 0, 40, 0.03);
+        padding: 16px 18px;
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+
+      .card p {
+        margin: 4px 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .progress-wrap {
+        margin-top: 10px;
+        font-size: 13px;
+      }
+
+      .progress-bar {
+        margin-top: 6px;
+        width: 100%;
+        height: 8px;
+        background: #e7e8f5;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #5065a8, #8094ff);
+        transition: width 0.25s ease-out;
+      }
+
+      .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .list-header h2 {
+        margin: 0;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .day-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .day-card {
+        display: flex;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background: #fcfcff;
+        align-items: flex-start;
+        transition: background 0.15s ease, transform 0.1s ease,
+          box-shadow 0.1s ease;
+      }
+
+      .day-card:hover {
+        background: #f2f3ff;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(0, 0, 30, 0.04);
+      }
+
+      .day-number {
+        min-width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .day-content {
+        flex: 1;
+      }
+
+      .day-title {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .day-ref {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .day-note {
+        margin-top: 4px;
+        font-size: 12px;
+        color: #444;
+      }
+
+      .day-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 6px;
+      }
+
+      .done-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 11px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.15s ease, border-color 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .done-toggle span {
+        font-size: 14px;
+      }
+
+      .done-toggle.done {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .small-link {
+        font-size: 11px;
+        color: var(--muted);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .right-card-section {
+        margin-top: 10px;
+      }
+
+      footer {
+        margin-top: 28px;
+        font-size: 11px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      a {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="badge">
+          <span>📖</span>
+          <span>Bibel-Leseplan</span>
+        </div>
+        <h1>30 Tage mit Jesus</h1>
+        <p class="subtitle">
+          Ein ästhetischer Bibelleseplan von Gabriella Anastasia Sapari.
+        </p>
+        <div class="intro-card">
+          Dieser Plan führt dich in 30 Tagen durch zentrale Momente im Leben
+          Jesu. <br />
+          Nimm dir jeden Tag <strong>10–20 Minuten</strong> für
+          <strong>Lesen – Nachdenken – Beten</strong>. <br />
+          Dein Fortschritt wird lokal in deinem Browser gespeichert.
+        </div>
+      </header>
+
+      <div class="layout">
+        <!-- Linke Seite: Tage -->
+        <section class="card">
+          <div class="list-header">
+            <h2>Lesetag auswählen</h2>
+            <div class="hint">Tippe auf ✅ um einen Tag als gelesen zu markieren.</div>
+          </div>
+          <div class="day-list" id="dayList"></div>
+        </section>
+
+        <!-- Rechte Seite: Details & Fortschritt -->
+        <aside class="card">
+          <h2>Dein Fortschritt</h2>
+          <p id="progressText">0 von 30 Tagen abgeschlossen (0%).</p>
+          <div class="progress-wrap">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="right-card-section">
+            <h2>Wie nutzen?</h2>
+            <p>
+              1. Lies die angegebenen Verse in deiner bevorzugten Übersetzung
+              (Deutsch, Indonesisch, Englisch usw.).<br />
+              2. Notiere Gedanken in deinem Journal.<br />
+              3. Schliesse mit einem einfachen, ehrlichen Gebet ab.
+            </p>
+          </div>
+
+          <div class="right-card-section">
+            <h2>Repo & PDF</h2>
+            <p>
+              Der vollständige Plan ist auch im
+              <a href="https://github.com/gabriellasapari/bibel-leseplan" target="_blank"
+                >GitHub-Repository</a
+              >
+              verfügbar. <br />
+              Später kannst du daraus auch ein ästhetisches PDF oder Notion-Template
+              machen.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <footer>
+        Erstellt mit Liebe von Gabriella • Soli Deo Gloria.
+      </footer>
+    </div>
+
+    <script>
+      const plan = [
+        {
+          day: 1,
+          ref: "Johannes 1,1–18",
+          theme: "Jesus – das Wort Gottes",
+          note: "Yesus adalah Firman."
+        },
+        {
+          day: 2,
+          ref: "Lukas 1,26–38",
+          theme: "Ankündigung der Geburt",
+          note: "Ketaatan Maria."
+        },
+        {
+          day: 3,
+          ref: "Lukas 2,1–20",
+          theme: "Geburt Jesu",
+          note: "Rendah hati & Kemuliaan."
+        },
+        {
+          day: 4,
+          ref: "Matthäus 3,1–17",
+          theme: "Taufe Jesu",
+          note: "„Du bist mein geliebter Sohn“."
+        },
+        {
+          day: 5,
+          ref: "Matthäus 4,1–11",
+          theme: "Versuchung in der Wüste",
+          note: "Yesus menang melawan pencobaan."
+        },
+        {
+          day: 6,
+          ref: "Lukas 4,14–30",
+          theme: "Jesu Auftrag",
+          note: "„Der Geist des Herrn ist auf mir…“"
+        },
+        {
+          day: 7,
+          ref: "Matthäus 5,1–16",
+          theme: "Seligpreisungen",
+          note: "Karakter Kerajaan."
+        },
+        {
+          day: 8,
+          ref: "Matthäus 6,5–15",
+          theme: "Vaterunser",
+          note: "Belajar berdoa dari Yesus."
+        },
+        {
+          day: 9,
+          ref: "Matthäus 6,25–34",
+          theme: "Sorge & Vertrauen",
+          note: "„Suchet zuerst das Reich Gottes…“"
+        },
+        {
+          day: 10,
+          ref: "Markus 2,1–12",
+          theme: "Heilung des Gelähmten",
+          note: "Iman teman membawa mujizat."
+        },
+        {
+          day: 11,
+          ref: "Markus 4,35–41",
+          theme: "Sturmstillung",
+          note: "Yesus > badai."
+        },
+        {
+          day: 12,
+          ref: "Markus 5,21–43",
+          theme: "Jairus’ Tochter & blutige Frau",
+          note: "Yesus melihat hati."
+        },
+        {
+          day: 13,
+          ref: "Johannes 4,1–26",
+          theme: "Frau am Brunnen",
+          note: "Air hidup."
+        },
+        {
+          day: 14,
+          ref: "Johannes 6,1–15",
+          theme: "Speisung der 5.000",
+          note: "Multiplikasi di tangan Yesus."
+        },
+        {
+          day: 15,
+          ref: "Johannes 6,60–69",
+          theme: "Worte des Lebens",
+          note: "„Zu wem sollten wir gehen?“"
+        },
+        {
+          day: 16,
+          ref: "Lukas 7,36–50",
+          theme: "Sünderin salbt Jesus",
+          note: "Diampuni untuk mengasihi."
+        },
+        {
+          day: 17,
+          ref: "Lukas 10,25–37",
+          theme: "Barmherziger Samariter",
+          note: "Kasih yang praktis."
+        },
+        {
+          day: 18,
+          ref: "Lukas 15,11–32",
+          theme: "Verlorener Sohn",
+          note: "Bapa yang selalu menunggu."
+        },
+        {
+          day: 19,
+          ref: "Johannes 8,1–11",
+          theme: "Frau beim Ehebruch",
+          note: "Kasih yang mengampuni & mengubah."
+        },
+        {
+          day: 20,
+          ref: "Johannes 10,1–18",
+          theme: "Der gute Hirte",
+          note: "Yesus gembala yang baik."
+        },
+        {
+          day: 21,
+          ref: "Johannes 11,1–44",
+          theme: "Auferweckung des Lazarus",
+          note: "Yesus: kebangkitan & hidup."
+        },
+        {
+          day: 22,
+          ref: "Matthäus 16,13–20",
+          theme: "Petrus’ Bekenntnis",
+          note: "„Du bist der Christus“."
+        },
+        {
+          day: 23,
+          ref: "Matthäus 17,1–9",
+          theme: "Verklärung",
+          note: "Sekilas kemuliaan-Nya."
+        },
+        {
+          day: 24,
+          ref: "Johannes 13,1–17",
+          theme: "Fußwaschung",
+          note: "Kepemimpinan = melayani."
+        },
+        {
+          day: 25,
+          ref: "Johannes 14,1–14",
+          theme: "Jesus – der Weg",
+          note: "Jalan, Kebenaran, Hidup."
+        },
+        {
+          day: 26,
+          ref: "Johannes 15,1–17",
+          theme: "Weinstock & Reben",
+          note: "Tinggal di dalam Dia."
+        },
+        {
+          day: 27,
+          ref: "Matthäus 26,36–46",
+          theme: "Getsemani",
+          note: "Yesus dan pergumulan batin."
+        },
+        {
+          day: 28,
+          ref: "Lukas 23,32–49",
+          theme: "Kreuzigung",
+          note: "Kasih yang mengorbankan."
+        },
+        {
+          day: 29,
+          ref: "Lukas 24,1–12",
+          theme: "Auferstehung",
+          note: "Kubur kosong, harapan hidup."
+        },
+        {
+          day: 30,
+          ref: "Matthäus 28,16–20",
+          theme: "Missionsbefehl",
+          note: "Dipanggil untuk pergi & mengutus."
+        }
+      ];
+
+      const STORAGE_KEY = "bibelLesen30Status";
+      const dayListEl = document.getElementById("dayList");
+      const progressTextEl = document.getElementById("progressText");
+      const progressFillEl = document.getElementById("progressFill");
+
+      function loadStatus() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          return JSON.parse(raw);
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveStatus(status) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(status));
+      }
+
+      function render() {
+        const status = loadStatus();
+        dayListEl.innerHTML = "";
+        let doneCount = 0;
+
+        plan.forEach((item) => {
+          const isDone = !!status[item.day];
+          if (isDone) doneCount++;
+
+          const card = document.createElement("div");
+          card.className = "day-card";
+
+          const num = document.createElement("div");
+          num.className = "day-number";
+          num.textContent = item.day;
+
+          const content = document.createElement("div");
+          content.className = "day-content";
+
+          const title = document.createElement("div");
+          title.className = "day-title";
+          title.textContent = item.theme;
+
+          const ref = document.createElement("div");
+          ref.className = "day-ref";
+          ref.textContent = item.ref;
+
+          const note = document.createElement("div");
+          note.className = "day-note";
+          note.textContent = item.note;
+
+          content.appendChild(title);
+          content.appendChild(ref);
+          content.appendChild(note);
+
+          const actions = document.createElement("div");
+          actions.className = "day-actions";
+
+          const toggle = document.createElement("button");
+          toggle.type = "button";
+          toggle.className = "done-toggle" + (isDone ? " done" : "");
+          toggle.innerHTML = `<span>${isDone ? "✅" : "☐"}</span>${
+            isDone ? "Gelesen" : "Noch offen"
+          }`;
+
+          toggle.addEventListener("click", () => {
+            const s = loadStatus();
+            s[item.day] = !s[item.day];
+            saveStatus(s);
+            render();
+          });
+
+          const clearLink = document.createElement("span");
+          clearLink.className = "small-link";
+          clearLink.textContent = "Nur diesen Tag zurücksetzen";
+          clearLink.addEventListener("click", () => {
+            const s = loadStatus();
+            delete s[item.day];
+            saveStatus(s);
+            render();
+          });
+
+          actions.appendChild(toggle);
+          actions.appendChild(clearLink);
+
+          card.appendChild(num);
+          card.appendChild(content);
+          card.appendChild(actions);
+
+          dayListEl.appendChild(card);
+        });
+
+        const percent = Math.round((doneCount / plan.length) * 100);
+        progressTextEl.textContent = `${doneCount} von ${
+          plan.length
+        } Tagen abgeschlossen (${percent}%).`;
+        progressFillEl.style.width = percent + "%";
+      }
+
+      render();
+    </script>
+  </body>
+</html>

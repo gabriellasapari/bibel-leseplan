@@ -591,13 +591,19 @@
     title.className = "day-title";
     title.textContent = `Tag ${day}`;
 
-    const morningEl = document.createElement("p");
-    morningEl.className = "day-ref";
-    morningEl.textContent = `Morgens: ${morning}`;
+   const morningEl = document.createElement("p");
+morningEl.className = "day-ref morning fade-in";
+morningEl.innerHTML = `
+  <span class="ref-label">🌅 Morgens</span>
+  <span class="ref-text">${morning}</span>
+`;
 
-    const eveningEl = document.createElement("p");
-    eveningEl.className = "day-ref";
-    eveningEl.textContent = `Abends: ${evening}`;
+const eveningEl = document.createElement("p");
+eveningEl.className = "day-ref evening fade-in";
+eveningEl.innerHTML = `
+  <span class="ref-label">🌙 Abends</span>
+  <span class="ref-text">${evening}</span>
+`;
 
     content.appendChild(title);
     content.appendChild(morningEl);

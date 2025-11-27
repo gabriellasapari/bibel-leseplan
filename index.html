@@ -308,6 +308,180 @@
       a {
         color: var(--accent);
       }
+
+      /* === NAV: Leseplan / Über mich / Journal === */
+
+.top-nav {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nav-btn {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.nav-btn-active {
+  background: var(--accent-soft);
+  color: #2c2415;
+  border-color: var(--accent);
+}
+
+body[data-theme="dark"] .nav-btn {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: #555;
+}
+
+body[data-theme="dark"] .nav-btn-active {
+  background: #ffdb99;
+  color: #2c2415;
+}
+
+/* Sections */
+
+.section {
+  display: none;
+  margin-top: 18px;
+}
+
+.section.section-active {
+  display: block;
+}
+
+/* About & Journal cards */
+
+.about-card,
+.journal-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.04);
+}
+
+.about-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.about-meta span {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+body[data-theme="dark"] .about-meta span {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.journal-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.journal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.journal-row label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.journal-select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body[data-theme="dark"] .journal-select {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text);
+}
+
+.journal-textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+body[data-theme="dark"] .journal-textarea {
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--text);
+}
+
+.journal-save-btn {
+  margin-top: 6px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #2c2415;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.journal-save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+.journal-status {
+  font-size: 13px;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+/* Musik-Auswahl im Header */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.music-select {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body[data-theme="dark"] .music-select {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text);
+}
+
     </style>
   </head>
   <body>

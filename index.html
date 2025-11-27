@@ -554,84 +554,125 @@
       }
 
       function render() {
-        const status = loadStatus();
-        dayListEl.innerHTML = "";
-        let doneCount = 0;
+  const dayListEl = document.getElementById("day-list");
+  const progressTextEl = document.getElementById("progress-text");
+  const progressFillEl = document.getElementById("progress-fill");
 
-        plan.forEach((item) => {
-          const isDone = !!status[item.day];
-          if (isDone) doneCount++;
+  // state disimpan di localStorage
+  const STORAGE_KEY = "bibel-leseplan-dez-2025";
+  const stored = localStorage.getItem(STORAGE_KEY);
+  const state = stored ? JSON.parse(stored) : {}; // contoh: { "1": { done: true }, ... }
 
-          const card = document.createElement("div");
-          card.className = "day-card";
+  // bersihkan list hari dulu
+  dayListEl.innerHTML = "";
 
-          const num = document.createElement("div");
-          num.className = "day-number";
-          num.textContent = item.day;
+  let doneCount = 0;
 
-          const content = document.createElement("div");
-          content.className = "day-content";
+  plan.forEach((entry) => {
+    const { day, morning, evening } = entry;
+    const isDone = !!(state[day] && state[day].done);
 
-          const title = document.createElement("div");
-          title.className = "day-title";
-          title.textContent = item.theme;
+    if (isDone) doneCount++;
 
-          const ref = document.createElement("div");
-          ref.className = "day-ref";
-          ref.textContent = item.ref;
+    // === card wrapper ===
+    const card = document.createElement("article");
+    card.className = "day-card";
 
-          const note = document.createElement("div");
-          note.className = "day-note";
-          note.textContent = item.note;
+    // nomor hari
+    const num = document.createElement("div");
+    num.className = "day-num";
+    num.textContent = day;
 
-          content.appendChild(title);
-          content.appendChild(ref);
-          content.appendChild(note);
+    // konten teks
+    const content = document.createElement("div");
+    content.className = "day-content";
 
-          const actions = document.createElement("div");
-          actions.className = "day-actions";
+    const title = document.createElement("h3");
+    title.className = "day-title";
+    title.textContent = `Tag ${day}`;
 
-          const toggle = document.createElement("button");
-          toggle.type = "button";
-          toggle.className = "done-toggle" + (isDone ? " done" : "");
-          toggle.innerHTML = `<span>${isDone ? "✅" : "☐"}</span>${
-            isDone ? "Gelesen" : "Noch offen"
-          }`;
+    const morningEl = document.createElement("p");
+    morningEl.className = "day-ref";
+    morningEl.textContent = `Morgens: ${morning}`;
 
-          toggle.addEventListener("click", () => {
-            const s = loadStatus();
-            s[item.day] = !s[item.day];
-            saveStatus(s);
-            render();
-          });
+    const eveningEl = document.createElement("p");
+    eveningEl.className = "day-ref";
+    eveningEl.textContent = `Abends: ${evening}`;
 
-          const clearLink = document.createElement("span");
-          clearLink.className = "small-link";
-          clearLink.textContent = "Nur diesen Tag zurücksetzen";
-          clearLink.addEventListener("click", () => {
-            const s = loadStatus();
-            delete s[item.day];
-            saveStatus(s);
-            render();
-          });
+    content.appendChild(title);
+    content.appendChild(morningEl);
+    content.appendChild(eveningEl);
 
-          actions.appendChild(toggle);
-          actions.appendChild(clearLink);
+    // aksi (tombol + reset)
+    const actions = document.createElement("div");
+    actions.className = "day-actions";
 
-          card.appendChild(num);
-          card.appendChild(content);
-          card.appendChild(actions);
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "btn-small";
+    toggleBtn.type = "button";
 
-          dayListEl.appendChild(card);
-        });
+    const updateButtonAppearance = () => {
+      if (isDone) {
+        toggleBtn.textContent = "Gelesen";
+        toggleBtn.classList.add("is-done");
+      } else {
+        toggleBtn.textContent = "Noch offen";
+        toggleBtn.classList.remove("is-done");
+      }
+    };
+    updateButtonAppearance();
 
-        const percent = Math.round((doneCount / plan.length) * 100);
-        progressTextEl.textContent = `${doneCount} von ${
-          plan.length
-        } Tagen abgeschlossen (${percent}%).`;
-        progressFillEl.style.width = percent + "%";
+    // klik tombol: toggle selesai / belum
+    toggleBtn.addEventListener("click", () => {
+      const latestRaw = localStorage.getItem(STORAGE_KEY);
+      const latestState = latestRaw ? JSON.parse(latestRaw) : {};
+
+      if (latestState[day] && latestState[day].done) {
+        delete latestState[day];
+      } else {
+        latestState[day] = { done: true, ts: Date.now() };
       }
 
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(latestState));
+      render(); // render ulang supaya progress bar & teks update
+    });
+
+    const clearLink = document.createElement("a");
+    clearLink.href = "#";
+    clearLink.className = "reset-link";
+    clearLink.textContent = "Nur diesen Tag zurücksetzen";
+
+    clearLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      const latestRaw = localStorage.getItem(STORAGE_KEY);
+      const latestState = latestRaw ? JSON.parse(latestRaw) : {};
+
+      if (latestState[day]) {
+        delete latestState[day];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(latestState));
+      }
+
+      render();
+    });
+
+    actions.appendChild(toggleBtn);
+    actions.appendChild(clearLink);
+
+    // rakit card
+    card.appendChild(num);
+    card.appendChild(content);
+    card.appendChild(actions);
+
+    dayListEl.appendChild(card);
+  });
+
+  // === progress bar ===
+  const percent = Math.round((doneCount / plan.length) * 100);
+
+  progressTextEl.textContent = `${doneCount} von ${plan.length} Tagen abgeschlossen (${percent}%).`;
+  progressFillEl.style.width = percent + "%";
+}
+      
      render();
 
     /* === THEME & MUSIC TOGGLE === */

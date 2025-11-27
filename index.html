@@ -5,6 +5,51 @@
     <title>Bibel-Leseplan – 30 Tage mit Jesus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
+      body[data-theme="dark"] {
+  --bg: #1b1b1b;
+  --card-bg: #262626;
+  --text: #e8e8e8;
+  --accent: #ffcc66;
+  --border: #444;
+}
+      .glow-soft {
+        /* --- HEADER BUTTONS (MUSIC + THEME) --- */
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.header-actions button {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.header-actions button:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.music-toggle.glow-soft,
+.theme-toggle.glow-soft {
+  animation: glow 3s ease-in-out infinite;
+}
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
+  50% { box-shadow: 0 0 12px rgba(255,215,0,0.7); }
+  100% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
+}
       :root {
   /* Elegant Gold & Beige Palette */
   --bg: #f7f3eb;
@@ -268,9 +313,9 @@
   <body>
     <div class="page">
       <header>
-        <div class="badge">
-          <span>📖</span>
-          <span>Bibel-Leseplan</span>
+        <div class="header-actions">
+    <button class="music-toggle" id="music-toggle">▶ Musik</button>
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
         </div>
         <h1>30 Tage mit Jesus</h1>
         <p class="subtitle">
@@ -315,19 +360,7 @@
             </p>
           </div>
 
-          <div class="right-card-section">
-            <h2>Repo & PDF</h2>
-            <p>
-              Der vollständige Plan ist auch im
-              <a href="https://github.com/gabriellasapari/bibel-leseplan" target="_blank"
-                >GitHub-Repository</a
-              >
-              verfügbar. <br />
-              Später kannst du daraus auch ein ästhetisches PDF oder Notion-Template
-              machen.
-            </p>
-          </div>
-        </aside>
+    
       </div>
 
       <footer>
@@ -617,7 +650,60 @@
         progressFillEl.style.width = percent + "%";
       }
 
-      render();
-    </script>
-  </body>
+     render();
+
+    /* === THEME & MUSIC TOGGLE === */
+
+  // === THEME TOGGLE (LIGHT / DARK) ===
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const bodyEl = document.body;
+
+  if (themeToggleBtn) {
+    // set initial theme from localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      bodyEl.setAttribute("data-theme", "dark");
+      themeToggleBtn.textContent = "☀";
+    } else {
+      themeToggleBtn.textContent = "🌙";
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = bodyEl.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        bodyEl.removeAttribute("data-theme");
+        localStorage.setItem("theme", "light");
+        themeToggleBtn.textContent = "🌙";
+      } else {
+        bodyEl.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+        themeToggleBtn.textContent = "☀";
+      }
+    });
+  }
+
+  // === WORSHIP MUSIC TOGGLE ===
+  const musicBtn = document.getElementById("music-toggle");
+  const worshipAudio = document.getElementById("worship-audio");
+
+  if (musicBtn && worshipAudio) {
+    let playing = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (playing) {
+        worshipAudio.pause();
+        musicBtn.textContent = "▶ Musik";
+      } else {
+        worshipAudio.play().catch(() => {
+          // kalau browser block autoplay, user tinggal klik lagi
+        });
+        musicBtn.textContent = "⏸ Pause";
+      }
+      playing = !playing;
+    });
+  }
+
+</script>
+</body>
 </html>
+

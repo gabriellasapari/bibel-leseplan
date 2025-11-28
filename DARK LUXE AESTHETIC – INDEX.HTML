@@ -682,6 +682,35 @@ function render() {
 render();
 
 /* ---------------------------------------------------
+   FOCUS MODE
+--------------------------------------------------- */
+
+const focusOverlay = document.getElementById("focusOverlay");
+const focusClose = document.getElementById("focusClose");
+const focusDateEl = document.getElementById("focusDate");
+const focusTitleEl = document.getElementById("focusTitle");
+const focusMorningEl = document.getElementById("focusMorning");
+const focusEveningEl = document.getElementById("focusEvening");
+
+function openFocus(day, morning, evening) {
+  focusTitleEl.textContent = `Tag ${day}`;
+  focusMorningEl.textContent = `Morgens: ${morning}`;
+  focusEveningEl.textContent = `Abends: ${evening}`;
+  focusDateEl.textContent = `Dezember 2025 – Tag ${day}`;
+  focusOverlay.hidden = false;
+}
+
+focusClose.onclick = () => {
+  focusOverlay.hidden = true;
+};
+
+focusOverlay.addEventListener("click", (e) => {
+  if (e.target === focusOverlay) {
+    focusOverlay.hidden = true;
+  }
+});
+
+/* ---------------------------------------------------
    TAB SWITCHING
 --------------------------------------------------- */
 

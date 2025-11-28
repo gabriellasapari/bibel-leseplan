@@ -701,16 +701,23 @@ function openFocus(day, morning, evening) {
   focusMorningEl.textContent = `Morgens: ${morning}`;
   focusEveningEl.textContent = `Abends: ${evening}`;
   focusDateEl.textContent = `Dezember 2025 – Tag ${day}`;
-  focusOverlay.hidden = false;
+
+  focusOverlay.classList.add("is-open");   // ⬅ tampilkan overlay
+  document.body.style.overflow = "hidden"; // ⬅ opsional: kunci scroll belakang
+}
+
+function closeFocus() {
+  focusOverlay.classList.remove("is-open"); // ⬅ sembunyikan overlay
+  document.body.style.overflow = "";        // ⬅ buka lagi scroll
 }
 
 focusClose.onclick = () => {
-  focusOverlay.hidden = true;
+  closeFocus();
 };
 
 focusOverlay.addEventListener("click", (e) => {
   if (e.target === focusOverlay) {
-    focusOverlay.hidden = true;
+    closeFocus();
   }
 });
 

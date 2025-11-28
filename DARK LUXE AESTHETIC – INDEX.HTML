@@ -751,13 +751,60 @@ themeBtn.onclick = () => {
    JOURNAL SAVE
 --------------------------------------------------- */
 
-document.getElementById("journal-save").onclick = () => {
-  const txt = document.getElementById("journal-text").value;
-  localStorage.setItem("journal-darkluxe", txt);
-  document.getElementById("journal-status").textContent = "Gespeichert ✓";
-};
+/* ---------------------------------------------------
+   JOURNAL PER TAG
+--------------------------------------------------- */
 
-document.getElementById("journal-text").value = localStorage.getItem("journal-darkluxe") || "";
+const journalDaySelect = document.getElementById("journal-day");
+const journalText = document.getElementById("journal-text");
+const journalStatus = document.getElementById("journal-status");
+const JOURNAL_KEY = "journal-darkluxe-v2";
+
+let journalStore = {};
+try {
+  const saved = localStorage.getItem(JOURNAL_KEY);
+  journalStore = saved ? JSON.parse(saved) : {};
+} catch {
+  journalStore = {};
+}
+
+// isi dropdown Tag 1–31
+if (journalDaySelect) {
+  plan.forEach(({ day }) => {
+    const opt = document.createElement("option");
+    opt.value = String(day);
+    opt.textContent = `Tag ${day}`;
+    journalDaySelect.appendChild(opt);
+  });
+
+  // pilih default: heute, kalau Des 2025
+  const t = new Date();
+  if (t.getFullYear() === 2025 && t.getMonth() === 11) {
+    const dd = t.getDate();
+    const opt = [...journalDaySelect.options].find(o => Number(o.value) === dd);
+    if (opt) journalDaySelect.value = String(dd);
+  }
+}
+
+function loadJournalForDay(day) {
+  journalText.value = journalStore[day] || "";
+}
+
+if (journalDaySelect) {
+  loadJournalForDay(journalDaySelect.value);
+
+  journalDaySelect.addEventListener("change", () => {
+    loadJournalForDay(journalDaySelect.value);
+    journalStatus.textContent = "";
+  });
+}
+
+document.getElementById("journal-save").onclick = () => {
+  const day = journalDaySelect.value;
+  journalStore[day] = journalText.value || "";
+  localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalStore));
+  journalStatus.textContent = "Gespeichert ✓";
+};
 
 /* ---------------------------------------------------
    MUSIC PLAYER + GENRE SELECTOR

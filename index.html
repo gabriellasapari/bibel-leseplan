@@ -832,10 +832,24 @@ const musicSources = {
   nature:   "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/nature-rain-river.mp3"
 };
 
-musicSelect.onchange = () => {
-  player.src = musicSources[musicSelect.value];
-  player.play();
-};
+function setMusicFromSelect(autoPlay = false) {
+  const src = musicSources[musicSelect.value];
+  if (!src) return;
+  player.src = src;
+  if (autoPlay) {
+    player.play().catch(() => {
+      // kalau browser block autoplay, user bisa tekan play manual
+    });
+  }
+}
+
+// set default musik sesuai option yang sedang dipilih (Ambient Worship)
+setMusicFromSelect(false);
+
+// kalau user ganti pilihan di dropdown
+musicSelect.addEventListener("change", () => {
+  setMusicFromSelect(true);
+});
 
 </script>
 

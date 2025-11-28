@@ -309,6 +309,98 @@ h1 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ---------------------------------------------------
+   LEVEL 3: TODAY BADGE + FOCUS MODE + JOURNAL CONTROLS
+--------------------------------------------------- */
+
+/* Hari "heute" */
+.day-card.today {
+  border-color: var(--gold);
+  box-shadow: 0 0 18px rgba(212,175,55,0.35);
+  position: relative;
+}
+
+.today-badge {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(212,175,55,0.18);
+  border: 1px solid rgba(212,175,55,0.6);
+  color: var(--gold);
+}
+
+/* Morgens / Abends layout */
+.day-ref-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.day-ref-label {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.4);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+}
+
+/* Focus Overlay */
+.focus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.focus-dialog {
+  background: #111;
+  border-radius: 18px;
+  padding: 20px 22px;
+  width: min(90vw, 480px);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 30px rgba(212,175,55,0.5);
+}
+
+.focus-close {
+  float: right;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Journal controls */
+.journal-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.journal-controls label {
+  font-size: 13px;
+}
+
+.journal-controls select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #111;
+  color: var(--text);
+}
+
 </style>
 </head>
 

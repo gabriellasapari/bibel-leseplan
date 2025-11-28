@@ -633,14 +633,46 @@ function render() {
     title.className = "day-title";
     title.textContent = `Tag ${day}`;
 
-    // Morgens / Abends rapi
+        // Morgens / Abends rapi + tombol YouVersion
     const rowM = document.createElement("div");
     rowM.className = "day-ref-row";
-    rowM.innerHTML = `<span class="day-ref-label">Morgens</span><span>${morning}</span>`;
+
+    const labelM = document.createElement("span");
+    labelM.className = "day-ref-label";
+    labelM.textContent = "Morgens";
+
+    const textM = document.createElement("span");
+    textM.textContent = morning;
+
+    const btnM = document.createElement("button");
+    btnM.className = "ref-link-btn";
+    btnM.type = "button";
+    btnM.textContent = "In YouVersion öffnen";
+    btnM.onclick = () => openBibleReference(morning);
+
+    rowM.appendChild(labelM);
+    rowM.appendChild(textM);
+    rowM.appendChild(btnM);
 
     const rowE = document.createElement("div");
     rowE.className = "day-ref-row";
-    rowE.innerHTML = `<span class="day-ref-label">Abends</span><span>${evening}</span>`;
+
+    const labelE = document.createElement("span");
+    labelE.className = "day-ref-label";
+    labelE.textContent = "Abends";
+
+    const textE = document.createElement("span");
+    textE.textContent = evening;
+
+    const btnE = document.createElement("button");
+    btnE.className = "ref-link-btn";
+    btnE.type = "button";
+    btnE.textContent = "In YouVersion öffnen";
+    btnE.onclick = () => openBibleReference(evening);
+
+    rowE.appendChild(labelE);
+    rowE.appendChild(textE);
+    rowE.appendChild(btnE);
 
     content.appendChild(title);
     content.appendChild(rowM);

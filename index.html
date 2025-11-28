@@ -356,10 +356,14 @@ h1 {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.75);
-  display: flex;
+  display: none;              /* ⬅ default: tidak kelihatan */
   align-items: center;
   justify-content: center;
   z-index: 50;
+}
+
+.focus-overlay.is-open {      /* ⬅ saat aktif */
+  display: flex;
 }
 
 .focus-dialog {

@@ -735,6 +735,79 @@ function render() {
 
 render();
 
+   /* ---------------------------------------------------
+   YOUVERSION AUTO-ROUTING (MOBILE vs DESKTOP)
+--------------------------------------------------- */
+
+// Deteksi device
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+// Mapping singkatan di Plan -> Buch-Code YouVersion
+const youvBookMap = {
+  "Hes": "EZK",      // Hesekiel
+  "Dan": "DAN",
+  "Hos": "HOS",
+  "Joël": "JOL",
+  "Joel": "JOL",
+  "Amos": "AMO",
+  "Obadja": "OBA",
+  "Jona": "JON",
+  "Micha": "MIC",
+  "Nahum": "NAH",
+  "Habakuk": "HAB",
+  "Zefanja": "ZEP",
+  "Haggai": "HAG",
+  "Sach": "ZEC",
+  "Maleachi": "MAL",
+
+  "Hebr": "HEB",
+  "Jak":  "JAS",
+  "Judas":"JUD",
+  "Offb": "REV"
+};
+
+// Dari teks seperti "Hes 45–46" -> { bookCode: "EZK", chapter: 45 }
+function parseReference(refText) {
+  if (!refText) return null;
+
+  // Ambil bagian sebelum dan sesudah spasi pertama
+  const parts = refText.split(/\s+/, 2);
+  if (parts.length < 2) return null;
+
+  const bookToken = parts[0];
+  const rest = parts[1];
+
+  const bookCode = youvBookMap[bookToken];
+  if (!bookCode) return null;
+
+  // Cari angka pertama sebagai chapter
+  const match = rest.match(/(\d+)/);
+  if (!match) return null;
+
+  const chapter = match[1];
+  return { bookCode, chapter };
+}
+
+// Buka referensi
+function openBibleReference(refText) {
+  const parsed = parseReference(refText);
+  if (!parsed) {
+    alert("Diese Bibelstelle konnte nicht automatisch erkannt werden.");
+    return;
+  }
+
+  const { bookCode, chapter } = parsed;
+
+  // Lutherbibel 2017 = 51  (kamu bisa ganti ke ID lain kalau mau)
+  const desktopUrl = `https://www.bible.com/bible/51/${bookCode}.${chapter}.DEU`;
+  const mobileUrl  = `youversion://bible?reference=${bookCode}.${chapter}`;
+
+  const finalUrl = isMobile() ? mobileUrl : desktopUrl;
+  window.open(finalUrl, "_blank", "noopener");
+}
+
 /* ---------------------------------------------------
    FOCUS MODE
 --------------------------------------------------- */

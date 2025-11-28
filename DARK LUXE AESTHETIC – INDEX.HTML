@@ -473,12 +473,34 @@ h1 {
   <!-- -------------------------------
        TAB: JOURNAL
   -------------------------------- -->
-  <div id="tab-journal" class="tab-section">
+    <div id="tab-journal" class="tab-section">
     <div class="journal-card">
-      <h2 style="color:var(--gold)">Mein Journal</h2>
-      <textarea id="journal-text" class="journal-textarea" placeholder="Schreibe hier deine Gedanken..."></textarea>
+      <h2 style="color:var(--gold)">Journal &amp; Gebet</h2>
+
+      <div class="journal-controls">
+        <label for="journal-day">Tag:</label>
+        <select id="journal-day"></select>
+      </div>
+
+      <textarea
+        id="journal-text"
+        class="journal-textarea"
+        placeholder="Was hat dich heute besonders angesprochen? Was möchtest du vor Gott aussprechen?"
+      ></textarea>
+
       <button id="journal-save" class="journal-save-btn">Speichern</button>
       <p id="journal-status" style="font-size:12px;color:var(--muted);margin-top:6px;"></p>
+    </div>
+  </div>
+
+    <!-- FOCUS OVERLAY (LEVEL 3) -->
+  <div id="focusOverlay" class="focus-overlay" hidden>
+    <div class="focus-dialog">
+      <button id="focusClose" class="focus-close">&times;</button>
+      <p id="focusDate" style="font-size:12px;color:var(--muted);margin-bottom:4px;"></p>
+      <h2 id="focusTitle" style="margin-top:0;color:var(--gold)"></h2>
+      <p id="focusMorning"></p>
+      <p id="focusEvening"></p>
     </div>
   </div>
 

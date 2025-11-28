@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<title>30 Tage mit Jesus – Bibelleseplan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+
+/* ---------------------------------------------------
+   DARK LUXE (BLACK + GOLD) UI
+--------------------------------------------------- */
+
+:root {
+  --bg: #0c0c0c;
+  --card-bg: #141414;
+  --text: #e8e8e8;
+  --muted: #9c9c9c;
+  --gold: #d4af37;
+  --gold-soft: #a98b2c;
+  --border: #2a2a2a;
+  --radius: 14px;
+}
+
+/* DARK MODE OVERRIDE */
+body[data-theme="light"] {
+  --bg: #f8f5e9;
+  --card-bg: #fffdf8;
+  --text: #2c2415;
+  --muted: #6a6047;
+  --gold: #b68a2c;
+  --border: #e2d3b8;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------------------------------------------------
+   PAGE WRAPPER
+--------------------------------------------------- */
+
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+}
+
+/* ---------------------------------------------------
+   HEADER
+--------------------------------------------------- */
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.header-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.header-btn:hover {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
+
+/* ---------------------------------------------------
+   TITLE BLOCK
+--------------------------------------------------- */
+
+h1 {
+  margin: 12px 0 6px;
+  font-size: 32px;
+  color: var(--gold);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.intro-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  line-height: 1.5rem;
+  margin-top: 16px;
+  box-shadow: 0 0 22px rgba(212,175,55,0.05);
+}
+
+/* ---------------------------------------------------
+   NAVIGATION (TABS)
+--------------------------------------------------- */
+
+.main-nav {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 14px;
+}
+
+.nav-tab:hover {
+  background: var(--gold);
+  color: black;
+}
+
+.nav-tab.is-active {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
+
+/* ---------------------------------------------------
+   TAB SECTIONS
+--------------------------------------------------- */
+
+.tab-section {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+/* ---------------------------------------------------
+   DAY LIST
+--------------------------------------------------- */
+
+.layout {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+}
+
+@media(max-width: 850px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: var(--radius);
+}
+
+.day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.day-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: #111;
+  border: 1px solid #222;
+  transition: 0.2s;
+}
+
+.day-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212,175,55,0.15);
+}
+
+.day-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.day-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.day-ref {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* BUTTON "done" */
+.btn-small {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-small.is-done {
+  background: var(--gold);
+  color: black;
+}
+
+.reset-link {
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------
+   PROGRESS BAR
+--------------------------------------------------- */
+
+.progress-bar {
+  height: 12px;
+  background: #333;
+  border-radius: 999px;
+  border: 1px solid #555;
+  margin-top: 6px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), #f0d98a);
+  border-radius: 999px;
+  transition: width 0.35s ease-out;
+}
+
+/* ---------------------------------------------------
+   ABOUT & JOURNAL
+--------------------------------------------------- */
+
+.about-card,
+.journal-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.journal-textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #111;
+  color: var(--text);
+  font-size: 15px;
+}
+
+/* SAVE BUTTON */
+.journal-save-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+}
+
+/* MUSIC SELECT */
+.music-select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: #111;
+  color: var(--gold);
+}
+
+/* ---------------------------------------------------
+   ANIMATION
+--------------------------------------------------- */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- HEADER BUTTONS -->
+  <div class="header-actions">
+    <select id="music-select" class="music-select">
+      <option value="ambient">Ambient Worship</option>
+      <option value="piano">Piano Worship</option>
+      <option value="harp">Harp / Soaking</option>
+      <option value="nature">Nature (Rain/River)</option>
+    </select>
+    <button id="theme-toggle" class="header-btn">☀</button>
+  </div>
+
+  <h1>30 Tage mit Jesus</h1>
+  <p class="subtitle">Ein ästhetischer Bibelleseplan von Gabriella Anastasia Sapari.</p>
+
+  <div class="intro-card">
+    Dieser Plan führt dich in 30 Tagen durch zentrale Momente im Leben Jesu.<br>
+    Nimm dir jeden Tag <strong>10–20 Minuten</strong> zum Lesen, Nachdenken und Beten.<br>
+    Dein Fortschritt bleibt lokal im Browser gespeichert.
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="main-nav">
+    <button class="nav-tab is-active" data-tab="lesenplan">📖 Leseplan</button>
+    <button class="nav-tab" data-tab="about">👤 Über mich</button>
+    <button class="nav-tab" data-tab="journal">📝 Journal</button>
+  </nav>
+
+  <!-- -------------------------------
+       TAB: LESEPLAN
+  -------------------------------- -->
+  <div id="tab-lesenplan" class="tab-section active">
+    <div class="layout">
+      <!-- Left -->
+      <section class="card">
+        <h2>Lesetag auswählen</h2>
+        <div class="day-list" id="dayList"></div>
+      </section>
+
+      <!-- Right -->
+      <aside class="card">
+        <h2>Dein Fortschritt</h2>
+        <p id="progressText">0 von 31 Tagen abgeschlossen (0%).</p>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- -------------------------------
+       TAB: ABOUT
+  -------------------------------- -->
+  <div id="tab-about" class="tab-section">
+    <div class="about-card">
+      <h2 style="color:var(--gold)">Über Gabriella</h2>
+      <p>
+        Ich bin Gabriella Anastasia Sapari — Studentin, Creatorin und Tochter Gottes.  
+        Dieser Bibelleseplan wurde gestaltet, um Jesus im Alltag näher zu kommen.
+      </p>
+    </div>
+  </div>
+
+  <!-- -------------------------------
+       TAB: JOURNAL
+  -------------------------------- -->
+  <div id="tab-journal" class="tab-section">
+    <div class="journal-card">
+      <h2 style="color:var(--gold)">Mein Journal</h2>
+      <textarea id="journal-text" class="journal-textarea" placeholder="Schreibe hier deine Gedanken..."></textarea>
+      <button id="journal-save" class="journal-save-btn">Speichern</button>
+      <p id="journal-status" style="font-size:12px;color:var(--muted);margin-top:6px;"></p>
+    </div>
+  </div>
+
+  <footer style="text-align:center;margin-top:30px;font-size:12px;color:var(--muted)">
+    Erstellt mit Liebe von Gabriella
+  </footer>
+
+</div>
+
+<!-- ---------------------------------------------------
+     MUSIC SOURCES
+--------------------------------------------------- -->
+<audio id="player" preload="auto"></audio>
+
+<script>
+
+/* ---------------------------------------------------
+   31-DAY READING PLAN (DECEMBER)
+--------------------------------------------------- */
+
+const plan = [
+{day:1, morning:"Hes 45–46", evening:"Hebr 11,20–40"},
+{day:2, morning:"Hes 47–48", evening:"Hebr 12"},
+{day:3, morning:"Dan 1–2", evening:"Hebr 13"},
+{day:4, morning:"Dan 3–4", evening:"Jak 1"},
+{day:5, morning:"Dan 5–6", evening:"Jak 2"},
+{day:6, morning:"Dan 7–8", evening:"Jak 3"},
+{day:7, morning:"Dan 9–10", evening:"Jak 4"},
+{day:8, morning:"Dan 11–12", evening:"Jak 5"},
+{day:9, morning:"Hos 1–4", evening:"Judas"},
+{day:10, morning:"Hos 5–8", evening:"Offb 1"},
+{day:11, morning:"Hos 9–11", evening:"Offb 2"},
+{day:12, morning:"Hos 12–14", evening:"Offb 3"},
+{day:13, morning:"Joel 1–4", evening:"Offb 4"},
+{day:14, morning:"Amos 1–3", evening:"Offb 5"},
+{day:15, morning:"Amos 4–6", evening:"Offb 6"},
+{day:16, morning:"Amos 7–9", evening:"Offb 7"},
+{day:17, morning:"Obadja", evening:"Offb 8"},
+{day:18, morning:"Jona", evening:"Offb 9"},
+{day:19, morning:"Micha 1–3", evening:"Offb 10"},
+{day:20, morning:"Micha 4–5", evening:"Offb 11"},
+{day:21, morning:"Micha 6–7", evening:"Offb 12"},
+{day:22, morning:"Nahum", evening:"Offb 13"},
+{day:23, morning:"Habakuk", evening:"Offb 14"},
+{day:24, morning:"Zefanja", evening:"Offb 15"},
+{day:25, morning:"Haggai", evening:"Offb 16"},
+{day:26, morning:"Sach 1–3", evening:"Offb 17"},
+{day:27, morning:"Sach 4–6", evening:"Offb 18"},
+{day:28, morning:"Sach 7–9", evening:"Offb 19"},
+{day:29, morning:"Sach 10–12", evening:"Offb 20"},
+{day:30, morning:"Sach 13–14", evening:"Offb 21"},
+{day:31, morning:"Maleachi", evening:"Offb 22"},
+];
+
+/* ---------------------------------------------------
+   RENDER DAY LIST
+--------------------------------------------------- */
+
+const STORAGE_KEY = "lesenplan-darkluxe";
+const dayListEl = document.getElementById("dayList");
+const progressTextEl = document.getElementById("progressText");
+const progressFillEl = document.getElementById("progressFill");
+
+function render() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  const state = raw ? JSON.parse(raw) : {};
+
+  dayListEl.innerHTML = "";
+  let doneCount = 0;
+
+  plan.forEach(({day, morning, evening}) => {
+    const done = state[day]?.done ?? false;
+    if (done) doneCount++;
+
+    const card = document.createElement("div");
+    card.className = "day-card";
+
+    const num = document.createElement("div");
+    num.className = "day-num";
+    num.textContent = day;
+
+    const content = document.createElement("div");
+    content.style.flex = "1";
+
+    const title = document.createElement("div");
+    title.className = "day-title";
+    title.textContent = `Tag ${day}`;
+
+    const m = document.createElement("div");
+    m.className = "day-ref";
+    m.innerHTML = `🌅 <strong>Morgens:</strong> ${morning}`;
+
+    const e = document.createElement("div");
+    e.className = "day-ref";
+    e.innerHTML = `🌙 <strong>Abends:</strong> ${evening}`;
+
+    content.appendChild(title);
+    content.appendChild(m);
+    content.appendChild(e);
+
+    const actions = document.createElement("div");
+    actions.style.display = "flex";
+    actions.style.flexDirection = "column";
+    actions.style.gap = "6px";
+
+    const btn = document.createElement("button");
+    btn.className = "btn-small";
+    btn.textContent = done ? "Gelesen" : "Noch offen";
+    if (done) btn.classList.add("is-done");
+
+    btn.onclick = () => {
+      const s = raw ? JSON.parse(raw) : {};
+      if (s[day]?.done) {
+        delete s[day];
+      } else {
+        s[day] = { done:true, ts:Date.now() };
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+      render();
+    };
+
+    const reset = document.createElement("span");
+    reset.className = "reset-link";
+    reset.textContent = "Zurücksetzen";
+    reset.onclick = () => {
+      const s = raw ? JSON.parse(raw) : {};
+      delete s[day];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+      render();
+    };
+
+    actions.appendChild(btn);
+    actions.appendChild(reset);
+
+    card.appendChild(num);
+    card.appendChild(content);
+    card.appendChild(actions);
+
+    dayListEl.appendChild(card);
+  });
+
+  // progress bar
+  const percent = Math.round((doneCount / plan.length) * 100);
+  progressTextEl.textContent = `${doneCount} von ${plan.length} Tagen abgeschlossen (${percent}%).`;
+  progressFillEl.style.width = percent + "%";
+}
+
+render();
+
+/* ---------------------------------------------------
+   TAB SWITCHING
+--------------------------------------------------- */
+
+document.querySelectorAll(".nav-tab").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelector(".nav-tab.is-active").classList.remove("is-active");
+    btn.classList.add("is-active");
+
+    document.querySelector(".tab-section.active").classList.remove("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  };
+});
+
+/* ---------------------------------------------------
+   THEME TOGGLE
+--------------------------------------------------- */
+
+const themeBtn = document.getElementById("theme-toggle");
+
+if (localStorage.getItem("theme") === "light") {
+  document.body.dataset.theme = "light";
+  themeBtn.textContent = "🌙";
+}
+
+themeBtn.onclick = () => {
+  if (document.body.dataset.theme === "light") {
+    document.body.removeAttribute("data-theme");
+    localStorage.setItem("theme", "dark");
+    themeBtn.textContent = "☀";
+  } else {
+    document.body.dataset.theme = "light";
+    localStorage.setItem("theme", "light");
+    themeBtn.textContent = "🌙";
+  }
+};
+
+/* ---------------------------------------------------
+   JOURNAL SAVE
+--------------------------------------------------- */
+
+document.getElementById("journal-save").onclick = () => {
+  const txt = document.getElementById("journal-text").value;
+  localStorage.setItem("journal-darkluxe", txt);
+  document.getElementById("journal-status").textContent = "Gespeichert ✓";
+};
+
+document.getElementById("journal-text").value = localStorage.getItem("journal-darkluxe") || "";
+
+/* ---------------------------------------------------
+   MUSIC PLAYER + GENRE SELECTOR
+--------------------------------------------------- */
+
+const player = document.getElementById("player");
+const musicSelect = document.getElementById("music-select");
+
+const musicSources = {
+  ambient:  "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3",
+  piano:    "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/piano-worship.mp3",
+  harp:     "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/harp-soaking.mp3",
+  nature:   "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/nature-rain-river.mp3"
+};
+
+musicSelect.onchange = () => {
+  player.src = musicSources[musicSelect.value];
+  player.play();
+};
+
+</script>
+
+</body>
+</html>

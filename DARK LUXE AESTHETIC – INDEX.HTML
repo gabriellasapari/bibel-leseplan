@@ -564,19 +564,41 @@ const dayListEl = document.getElementById("dayList");
 const progressTextEl = document.getElementById("progressText");
 const progressFillEl = document.getElementById("progressFill");
 
-function render() {
+function getState() {
   const raw = localStorage.getItem(STORAGE_KEY);
-  const state = raw ? JSON.parse(raw) : {};
+  return raw ? JSON.parse(raw) : {};
+}
 
+function setState(s) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+
+function render() {
+  const state = getState();
   dayListEl.innerHTML = "";
   let doneCount = 0;
 
-  plan.forEach(({day, morning, evening}) => {
+  // cek apakah hari ini adalah Dezember 2025
+  const today = new Date();
+  const isDec2025 =
+    today.getFullYear() === 2025 && today.getMonth() === 11;
+  const todayDay = isDec2025 ? today.getDate() : null;
+
+  plan.forEach(({ day, morning, evening }) => {
     const done = state[day]?.done ?? false;
     if (done) doneCount++;
 
     const card = document.createElement("div");
     card.className = "day-card";
+
+    // jika hari ini
+    if (todayDay && day === todayDay) {
+      card.classList.add("today");
+      const badge = document.createElement("div");
+      badge.className = "today-badge";
+      badge.textContent = "Heute";
+      card.appendChild(badge);
+    }
 
     const num = document.createElement("div");
     num.className = "day-num";
@@ -589,50 +611,60 @@ function render() {
     title.className = "day-title";
     title.textContent = `Tag ${day}`;
 
-    const m = document.createElement("div");
-    m.className = "day-ref";
-    m.innerHTML = `🌅 <strong>Morgens:</strong> ${morning}`;
+    // Morgens / Abends rapi
+    const rowM = document.createElement("div");
+    rowM.className = "day-ref-row";
+    rowM.innerHTML = `<span class="day-ref-label">Morgens</span><span>${morning}</span>`;
 
-    const e = document.createElement("div");
-    e.className = "day-ref";
-    e.innerHTML = `🌙 <strong>Abends:</strong> ${evening}`;
+    const rowE = document.createElement("div");
+    rowE.className = "day-ref-row";
+    rowE.innerHTML = `<span class="day-ref-label">Abends</span><span>${evening}</span>`;
 
     content.appendChild(title);
-    content.appendChild(m);
-    content.appendChild(e);
+    content.appendChild(rowM);
+    content.appendChild(rowE);
 
     const actions = document.createElement("div");
     actions.style.display = "flex";
     actions.style.flexDirection = "column";
     actions.style.gap = "6px";
 
+    // Done-Button
     const btn = document.createElement("button");
     btn.className = "btn-small";
     btn.textContent = done ? "Gelesen" : "Noch offen";
     if (done) btn.classList.add("is-done");
 
     btn.onclick = () => {
-      const s = raw ? JSON.parse(raw) : {};
+      const s = getState();
       if (s[day]?.done) {
         delete s[day];
       } else {
-        s[day] = { done:true, ts:Date.now() };
+        s[day] = { done: true, ts: Date.now() };
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+      setState(s);
       render();
     };
 
+    // Focus-Button
+    const focusBtn = document.createElement("button");
+    focusBtn.className = "btn-small";
+    focusBtn.textContent = "Im Fokus lesen";
+    focusBtn.onclick = () => openFocus(day, morning, evening);
+
+    // Reset-Link
     const reset = document.createElement("span");
     reset.className = "reset-link";
     reset.textContent = "Zurücksetzen";
     reset.onclick = () => {
-      const s = raw ? JSON.parse(raw) : {};
+      const s = getState();
       delete s[day];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+      setState(s);
       render();
     };
 
     actions.appendChild(btn);
+    actions.appendChild(focusBtn);
     actions.appendChild(reset);
 
     card.appendChild(num);
@@ -642,7 +674,6 @@ function render() {
     dayListEl.appendChild(card);
   });
 
-  // progress bar
   const percent = Math.round((doneCount / plan.length) * 100);
   progressTextEl.textContent = `${doneCount} von ${plan.length} Tagen abgeschlossen (${percent}%).`;
   progressFillEl.style.width = percent + "%";

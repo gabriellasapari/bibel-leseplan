@@ -455,7 +455,11 @@ h1 {
     <button id="lang-toggle" class="header-btn">ID</button>
     <select id="music-select" class="music-select">
   <option value="ambient">Ambient Worship</option>
-</select>
+</select> 
+
+    <!-- Play / Pause Musik -->
+  <button id="music-play" class="header-btn">▶</button>
+
     <button id="theme-toggle" class="header-btn">☀</button>
   </div>
 
@@ -1015,34 +1019,75 @@ langBtn.onclick = () => {
 };
 
 /* ---------------------------------------------------
-   MUSIC PLAYER + GENRE SELECTOR
+   MUSIC PLAYER + PLAY BUTTON
 --------------------------------------------------- */
 
 const player = document.getElementById("player");
 const musicSelect = document.getElementById("music-select");
+const musicPlayBtn = document.getElementById("music-play");
 
 const musicSources = {
   ambient: "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3"
 };
+
+let isPlaying = false;
 
 function setMusicFromSelect(autoPlay = false) {
   const src = musicSources[musicSelect.value];
   if (!src) return;
   player.src = src;
   if (autoPlay) {
-    player.play().catch(() => {
-      // kalau browser block autoplay, user bisa tekan play manual
+    player.play().then(() => {
+      isPlaying = true;
+      updatePlayButton();
+    }).catch(() => {
+      // Autoplay blockiert – Nutzer kann manuell auf Play drücken
+      isPlaying = false;
+      updatePlayButton();
     });
   }
 }
 
-// set default musik sesuai option yang sedang dipilih (Ambient Worship)
-setMusicFromSelect(false);
+function updatePlayButton() {
+  musicPlayBtn.textContent = isPlaying ? "⏸" : "▶";
+}
 
-// kalau user ganti pilihan di dropdown
-musicSelect.addEventListener("change", () => {
-  setMusicFromSelect(true);
+// Klick auf Play / Pause
+musicPlayBtn.addEventListener("click", () => {
+  // Falls noch keine Quelle gesetzt ist
+  if (!player.src) {
+    setMusicFromSelect(false);
+  }
+
+  if (isPlaying) {
+    player.pause();
+    isPlaying = false;
+    updatePlayButton();
+  } else {
+    player.play().then(() => {
+      isPlaying = true;
+      updatePlayButton();
+    }).catch(() => {
+      // wenn Play fehlschlägt, nichts tun
+    });
+  }
 });
+
+// Wenn Track zu Ende ist -> Button zurück auf ▶
+player.addEventListener("ended", () => {
+  isPlaying = false;
+  updatePlayButton();
+});
+
+// Falls du später mehrere Musik-Optionen hast
+musicSelect.addEventListener("change", () => {
+  const shouldPlay = isPlaying;
+  setMusicFromSelect(shouldPlay);
+});
+
+// Initial: Quelle setzen, aber noch nicht abspielen
+setMusicFromSelect(false);
+updatePlayButton();
 
 </script>
 

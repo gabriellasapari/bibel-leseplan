@@ -1,374 +1,439 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>31 Hari Bersama Yesus – Bacaan Alkitab</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>31 Hari Bersama Yesus – Rencana Bacaan Alkitab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    :root {
-      --bg: #0c0c0c;
-      --card-bg: #141414;
-      --text: #e8e8e8;
-      --muted: #9c9c9c;
-      --gold: #d4af37;
-      --border: #2a2a2a;
-      --radius: 14px;
-    }
+<style>
 
-    body[data-theme="light"] {
-      --bg: #f8f5e9;
-      --card-bg: #fffdf8;
-      --text: #2c2415;
-      --muted: #6a6047;
-      --gold: #b68a2c;
-      --border: #e2d3b8;
-    }
+/* ---------------------------------------------------
+   DARK LUXE (BLACK + GOLD) UI
+--------------------------------------------------- */
 
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
+:root {
+  --bg: #0c0c0c;
+  --card-bg: #141414;
+  --text: #e8e8e8;
+  --muted: #9c9c9c;
+  --gold: #d4af37;
+  --gold-soft: #a98b2c;
+  --border: #2a2a2a;
+  --radius: 14px;
+}
 
-    .page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 18px 60px;
-    }
+/* LIGHT MODE */
+body[data-theme="light"] {
+  --bg: #f8f5e9;
+  --card-bg: #fffdf8;
+  --text: #2c2415;
+  --muted: #6a6047;
+  --gold: #b68a2c;
+  --border: #e2d3b8;
+}
 
-    .header-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
 
-    .header-btn {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      transition: 0.25s;
-    }
+/* ---------------------------------------------------
+   PAGE WRAPPER
+--------------------------------------------------- */
 
-    .header-btn:hover {
-      background: var(--gold);
-      color: black;
-      box-shadow: 0 0 12px rgba(212,175,55,0.6);
-    }
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+}
 
-    .music-select {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--gold);
-      background: #111;
-      color: var(--gold);
-    }
+/* ---------------------------------------------------
+   HEADER
+--------------------------------------------------- */
 
-    h1 {
-      margin: 12px 0 6px;
-      font-size: 32px;
-      color: var(--gold);
-    }
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
+.header-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s;
+}
 
-    .intro-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      line-height: 1.5rem;
-      margin-top: 16px;
-      box-shadow: 0 0 22px rgba(212,175,55,0.05);
-    }
+.header-btn:hover {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
 
-    .main-nav {
-      margin-top: 22px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+/* ---------------------------------------------------
+   TITLE BLOCK
+--------------------------------------------------- */
 
-    .nav-tab {
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text);
-      cursor: pointer;
-      transition: 0.25s;
-      font-size: 14px;
-    }
+h1 {
+  margin: 12px 0 6px;
+  font-size: 32px;
+  color: var(--gold);
+}
 
-    .nav-tab:hover {
-      background: var(--gold);
-      color: black;
-    }
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
 
-    .nav-tab.is-active {
-      background: var(--gold);
-      color: black;
-      box-shadow: 0 0 12px rgba(212,175,55,0.6);
-    }
+.intro-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  line-height: 1.5rem;
+  margin-top: 16px;
+  box-shadow: 0 0 22px rgba(212,175,55,0.05);
+}
 
-    .tab-section {
-      display: none;
-      animation: fadeIn 0.4s ease;
-    }
+/* ---------------------------------------------------
+   NAVIGATION (TABS)
+--------------------------------------------------- */
 
-    .tab-section.active {
-      display: block;
-    }
+.main-nav {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    .layout {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 20px;
-    }
+.nav-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 14px;
+}
 
-    @media(max-width: 850px) {
-      .layout { grid-template-columns: 1fr; }
-    }
+.nav-tab:hover {
+  background: var(--gold);
+  color: black;
+}
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 18px;
-      border-radius: var(--radius);
-    }
+.nav-tab.is-active {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
 
-    .day-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+/* ---------------------------------------------------
+   TAB SECTIONS
+--------------------------------------------------- */
 
-    .day-card {
-      display: flex;
-      gap: 14px;
-      padding: 12px 14px;
-      border-radius: var(--radius);
-      background: #111;
-      border: 1px solid #222;
-      transition: 0.2s;
-      position: relative;
-    }
+.tab-section {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
 
-    .day-card:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 15px rgba(212,175,55,0.15);
-    }
+.tab-section.active {
+  display: block;
+}
 
-    .day-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-    }
+/* ---------------------------------------------------
+   DAY LIST
+--------------------------------------------------- */
 
-    .day-title {
-      font-size: 15px;
-      font-weight: 600;
-    }
+.layout {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+}
 
-    .day-ref-row {
-      display: flex;
-      gap: 6px;
-      align-items: baseline;
-      font-size: 13px;
-    }
+@media(max-width: 850px) {
+  .layout { grid-template-columns: 1fr; }
+}
 
-    .day-ref-label {
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(212,175,55,0.08);
-      border: 1px solid rgba(212,175,55,0.4);
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      text-transform: uppercase;
-    }
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: var(--radius);
+}
 
-    .ref-link-text {
-      background: none;
-      border: none;
-      padding-left: 4px;
-      font-size: 13px;
-      color: var(--text);
-      cursor: pointer;
-    }
+.day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
-    .ref-link-text:hover {
-      color: var(--gold);
-      text-decoration: underline;
-    }
+.day-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: #111;
+  border: 1px solid #222;
+  transition: 0.2s;
+}
 
-    .btn-small {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      font-size: 12px;
-    }
+.day-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212,175,55,0.15);
+}
 
-    .btn-small.is-done {
-      background: var(--gold);
-      color: black;
-    }
+.day-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: black;
+  display: none !important;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
 
-    .reset-link {
-      color: var(--muted);
-      font-size: 11px;
-      cursor: pointer;
-    }
+.day-title {
+  font-size: 15px;
+  font-weight: 600;
+}
 
-    .progress-bar {
-      height: 12px;
-      background: #333;
-      border-radius: 999px;
-      border: 1px solid #555;
-      margin-top: 6px;
-    }
+.day-ref {
+  font-size: 13px;
+  color: var(--muted);
+}
 
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--gold), #f0d98a);
-      border-radius: 999px;
-      transition: width 0.35s ease-out;
-    }
+/* BUTTON "done" */
+.btn-small {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 12px;
+}
 
-    .bible-note {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
+.btn-small.is-done {
+  background: var(--gold);
+  color: black;
+}
 
-    .about-card,
-    .journal-card {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
+.reset-link {
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
 
-    .journal-textarea {
-      width: 100%;
-      min-height: 180px;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #111;
-      color: var(--text);
-      font-size: 15px;
-    }
+/* ---------------------------------------------------
+   PROGRESS BAR
+--------------------------------------------------- */
 
-    .journal-save-btn {
-      margin-top: 10px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: var(--gold);
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      color: black;
-    }
+.progress-bar {
+  height: 12px;
+  background: #333;
+  border-radius: 999px;
+  border: 1px solid #555;
+  margin-top: 6px;
+}
 
-    .journal-controls {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), #f0d98a);
+  border-radius: 999px;
+  transition: width 0.35s ease-out;
+}
+   
+.bible-note {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+   
+/* ---------------------------------------------------
+   ABOUT & JOURNAL
+--------------------------------------------------- */
 
-    .journal-controls label {
-      font-size: 13px;
-    }
+.about-card,
+.journal-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
 
-    .journal-controls select {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #111;
-      color: var(--text);
-    }
+.journal-textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #111;
+  color: var(--text);
+  font-size: 15px;
+}
 
-    /* Fokus overlay */
-    .focus-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-    }
+/* SAVE BUTTON */
+.journal-save-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+}
 
-    .focus-overlay.is-open {
-      display: flex;
-    }
+/* MUSIC SELECT */
+.music-select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: #111;
+  color: var(--gold);
+}
 
-    .focus-dialog {
-      background: #111;
-      border-radius: 18px;
-      padding: 20px 22px;
-      width: min(90vw, 480px);
-      border: 1px solid var(--gold);
-      box-shadow: 0 0 30px rgba(212,175,55,0.5);
-    }
+/* ---------------------------------------------------
+   ANIMATION
+--------------------------------------------------- */
 
-    .focus-close {
-      float: right;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      font-size: 20px;
-      cursor: pointer;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-    .today-badge {
-      position: absolute;
-      top: 6px;
-      right: 10px;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(212,175,55,0.18);
-      border: 1px solid rgba(212,175,55,0.6);
-      color: var(--gold);
-    }
+/* ---------------------------------------------------
+   LEVEL 3: TODAY BADGE + FOCUS MODE + JOURNAL CONTROLS
+--------------------------------------------------- */
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* Hari "hari ini" */
+.day-card.today {
+  border-color: var(--gold);
+  box-shadow: 0 0 18px rgba(212,175,55,0.35);
+  position: relative;
+}
+
+.today-badge {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(212,175,55,0.18);
+  border: 1px solid rgba(212,175,55,0.6);
+  color: var(--gold);
+}
+
+/* Pagi / Malam layout */
+.day-ref-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.day-ref-label {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.4);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+}
+
+.ref-link-text {
+  background: none;
+  border: none;
+  padding: 0 0 0 4px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.ref-link-text:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+/* Focus Overlay */
+.focus-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.focus-overlay.is-open {
+  display: flex;
+}
+
+.focus-dialog {
+  background: #111;
+  border-radius: 18px;
+  padding: 20px 22px;
+  width: min(90vw, 480px);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 30px rgba(212,175,55,0.5);
+}
+
+.focus-close {
+  float: right;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Journal controls */
+.journal-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.journal-controls label {
+  font-size: 13px;
+}
+
+.journal-controls select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #111;
+  color: var(--text);
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="page">
 
+  <!-- HEADER BUTTONS -->
   <div class="header-actions">
     <button id="lang-toggle" class="header-btn">DE</button>
     <select id="music-select" class="music-select">
@@ -378,28 +443,30 @@
   </div>
 
   <h1>31 Hari Bersama Yesus</h1>
-  <p class="subtitle">Bacaan Alkitab – Desember 2025</p>
+  <p class="subtitle">Rencana Bacaan Alkitab – Desember 2025</p>
 
   <div class="intro-card">
-    Luangkan waktu <strong>10–20 menit</strong> setiap hari untuk membaca, merenungkan, dan berdoa.
+    Luangkan waktu <strong>10–20 menit</strong> setiap hari untuk membaca, merenungkan dan berdoa.
     Tekuni firman Tuhan setiap hari. Kemajuanmu disimpan secara lokal di browsermu.
   </div>
 
+  <!-- NAVIGATION -->
   <nav class="main-nav">
-    <button class="nav-tab is-active" data-tab="lesenplan">📖 Bacaan</button>
+    <button class="nav-tab is-active" data-tab="lesenplan">📖 Rencana Bacaan</button>
     <button class="nav-tab" data-tab="about">👤 Tentang Saya</button>
     <button class="nav-tab" data-tab="journal">📝 Jurnal</button>
   </nav>
 
-  <!-- TAB RENCANA -->
+  <!-- TAB: RENCANA BACAAN -->
   <div id="tab-lesenplan" class="tab-section active">
     <div class="layout">
-
+      <!-- Left -->
       <section class="card">
         <h2>Pilih Hari</h2>
         <div class="day-list" id="dayList"></div>
       </section>
 
+      <!-- Right -->
       <aside class="card">
         <h2>Kemajuanmu</h2>
         <p id="progressText">0 dari 31 hari selesai (0%).</p>
@@ -411,34 +478,42 @@
           Untuk teks Alkitab, kami menggunakan
           <a href="https://www.bible.com/app" target="_blank" rel="noopener noreferrer">
             YouVersion Bible App
-          </a>.
+          </a>
+          (Terjemahan Baru – TB).
         </p>
       </aside>
-
     </div>
   </div>
-
-  <!-- TAB ABOUT -->
+   
+  <!-- TAB: ABOUT -->
   <div id="tab-about" class="tab-section">
     <div class="about-card">
       <h2 style="color:var(--gold)">Tentang Saya</h2>
+
       <p>
-        Saya Gabriella, tinggal di Austria. Saya berasal dari Papua Barat (Indonesia),
+        Saya Gabriella dan tinggal di Austria. Saya berasal dari Papua Barat di Indonesia
         dan adalah pengikut Yesus Kristus.
       </p>
+
       <p>
-        Saya berasal dari keluarga yang memiliki iman yang kuat kepada Tuhan Yesus,
-        dan iman itu membentuk hidup saya sejak kecil.
+        Saya berasal dari keluarga dengan iman yang kuat kepada Tuhan Yesus, dan iman itu
+        membentuk hidup saya sejak masa kecil.
       </p>
+
       <p>
-        Jika kamu ingin berbagi kesaksian atau punya pertanyaan,
-        kamu dapat menghubungi saya melalui Instagram <strong>@gabriellasapari</strong>
-        atau email: <strong>gabriellaasw94@gmail.com</strong>.
+        Semua bacaan Alkitab dalam rencana ini mengikuti rencana bacaan satu tahun Gideons,
+        yang juga saya pakai secara pribadi.
+      </p>
+
+      <p>
+        Jika kamu punya pertanyaan atau ingin berbagi kesaksian, saya sangat senang
+        menerima pesanmu via Instagram <strong>@gabriellasapari</strong> atau email di
+        <a href="mailto:gabriellaasw94@gmail.com">gabriellaasw94@gmail.com</a>.
       </p>
     </div>
   </div>
 
-  <!-- TAB JOURNAL -->
+  <!-- TAB: JURNAL -->
   <div id="tab-journal" class="tab-section">
     <div class="journal-card">
       <h2 style="color:var(--gold)">Jurnal &amp; Doa</h2>
@@ -470,333 +545,371 @@
     </div>
   </div>
 
-  <!-- PRIVACY -->
+  <!-- PRIVACY NOTE -->
   <section style="background:var(--card-bg);padding:15px 20px;border-radius:12px;
-                  margin-top:30px;font-size:13px;color:var(--muted);line-height:1.6;">
+                margin-top:30px;font-size:13px;color:var(--muted);line-height:1.6;">
     <h3 style="margin-top:0;margin-bottom:8px;font-size:15px;color:var(--gold);">
-      Privasi &amp; Keamanan
+        Privasi &amp; Keamanan
     </h3>
     <p>
-      Kemajuan dan catatan jurnalmu hanya disimpan secara lokal di browser
-      di perangkat ini. Data tersebut tidak dikirim ke server mana pun dan
-      tidak dapat dilihat oleh orang lain – bahkan tidak oleh saya sebagai
-      pembuat halaman ini.
-    </p>
-    <p>
-      Jika kamu menghapus riwayat browser atau data situs ini, semua kemajuan
-      dan catatan yang tersimpan juga akan terhapus.
+        Kemajuan bacaan dan catatan jurnalmu hanya disimpan secara lokal di browser
+        di perangkat ini. Data tersebut tidak dikirim ke server mana pun dan tidak
+        dapat dilihat oleh orang lain – bahkan tidak oleh saya sebagai pembuat halaman ini.
+        Jika kamu menghapus riwayat browser atau data situs ini, semua kemajuan dan catatan
+        yang tersimpan juga akan terhapus.
     </p>
   </section>
-
+       
   <footer style="text-align:center;margin-top:30px;font-size:12px;color:var(--muted)">
     Dibuat dengan kasih oleh Gabriella
   </footer>
 
 </div>
 
+<!-- MUSIC SOURCE -->
 <audio id="player" preload="auto"></audio>
 
 <script>
-  /* RENCANA 31 HARI (TETAP PAKAI SINGKATAN SAMA) */
-  const plan = [
-    {day:1, morning:"Hes 45–46", evening:"Hebr 11,20–40"},
-    {day:2, morning:"Hes 47–48", evening:"Hebr 12"},
-    {day:3, morning:"Dan 1–2", evening:"Hebr 13"},
-    {day:4, morning:"Dan 3–4", evening:"Jak 1"},
-    {day:5, morning:"Dan 5–6", evening:"Jak 2"},
-    {day:6, morning:"Dan 7–8", evening:"Jak 3"},
-    {day:7, morning:"Dan 9–10", evening:"Jak 4"},
-    {day:8, morning:"Dan 11–12", evening:"Jak 5"},
-    {day:9, morning:"Hos 1–4", evening:"Judas"},
-    {day:10, morning:"Hos 5–8", evening:"Offb 1"},
-    {day:11, morning:"Hos 9–11", evening:"Offb 2"},
-    {day:12, morning:"Hos 12–14", evening:"Offb 3"},
-    {day:13, morning:"Joel 1–4", evening:"Offb 4"},
-    {day:14, morning:"Amos 1–3", evening:"Offb 5"},
-    {day:15, morning:"Amos 4–6", evening:"Offb 6"},
-    {day:16, morning:"Amos 7–9", evening:"Offb 7"},
-    {day:17, morning:"Obadja", evening:"Offb 8"},
-    {day:18, morning:"Jona", evening:"Offb 9"},
-    {day:19, morning:"Micha 1–3", evening:"Offb 10"},
-    {day:20, morning:"Micha 4–5", evening:"Offb 11"},
-    {day:21, morning:"Micha 6–7", evening:"Offb 12"},
-    {day:22, morning:"Nahum", evening:"Offb 13"},
-    {day:23, morning:"Habakuk", evening:"Offb 14"},
-    {day:24, morning:"Zefanja", evening:"Offb 15"},
-    {day:25, morning:"Haggai", evening:"Offb 16"},
-    {day:26, morning:"Sach 1–3", evening:"Offb 17"},
-    {day:27, morning:"Sach 4–6", evening:"Offb 18"},
-    {day:28, morning:"Sach 7–9", evening:"Offb 19"},
-    {day:29, morning:"Sach 10–12", evening:"Offb 20"},
-    {day:30, morning:"Sach 13–14", evening:"Offb 21"},
-    {day:31, morning:"Maleachi", evening:"Offb 22"},
-  ];
 
-  const STORAGE_KEY = "lesenplan-id";
-  const dayListEl = document.getElementById("dayList");
-  const progressTextEl = document.getElementById("progressText");
-  const progressFillEl = document.getElementById("progressFill");
+/* ---------------------------------------------------
+   31-DAY READING PLAN (DECEMBER)
+--------------------------------------------------- */
 
-  function getState() {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  }
+const plan = [
+  {day:1,  morning:"Yeh 45–46",        evening:"Ibr 11,20–40"},
+  {day:2,  morning:"Yeh 47–48",        evening:"Ibr 12"},
+  {day:3,  morning:"Dan 1–2",          evening:"Ibr 13"},
+  {day:4,  morning:"Dan 3–4",          evening:"Yak 1"},
+  {day:5,  morning:"Dan 5–6",          evening:"Yak 2"},
+  {day:6,  morning:"Dan 7–8",          evening:"Yak 3"},
+  {day:7,  morning:"Dan 9–10",         evening:"Yak 4"},
+  {day:8,  morning:"Dan 11–12",        evening:"Yak 5"},
+  {day:9,  morning:"Hos 1–4",          evening:"Yudas"},
+  {day:10, morning:"Hos 5–8",          evening:"Wahyu 1"},
+  {day:11, morning:"Hos 9–11",         evening:"Wahyu 2"},
+  {day:12, morning:"Hos 12–14",        evening:"Wahyu 3"},
+  {day:13, morning:"Yoel 1–4",         evening:"Wahyu 4"},
+  {day:14, morning:"Amos 1–3",         evening:"Wahyu 5"},
+  {day:15, morning:"Amos 4–6",         evening:"Wahyu 6"},
+  {day:16, morning:"Amos 7–9",         evening:"Wahyu 7"},
+  {day:17, morning:"Obaja 1",          evening:"Wahyu 8"},
+  {day:18, morning:"Yunus 1–4",        evening:"Wahyu 9"},
+  {day:19, morning:"Mikha 1–3",        evening:"Wahyu 10"},
+  {day:20, morning:"Mikha 4–5",        evening:"Wahyu 11"},
+  {day:21, morning:"Mikha 6–7",        evening:"Wahyu 12"},
+  {day:22, morning:"Nahum 1–3",        evening:"Wahyu 13"},
+  {day:23, morning:"Habakuk 1–3",      evening:"Wahyu 14"},
+  {day:24, morning:"Zefanya 1–3",      evening:"Wahyu 15"},
+  {day:25, morning:"Hagai 1–2",        evening:"Wahyu 16"},
+  {day:26, morning:"Zak 1–3",          evening:"Wahyu 17"},
+  {day:27, morning:"Zak 4–6",          evening:"Wahyu 18"},
+  {day:28, morning:"Zak 7–9",          evening:"Wahyu 19"},
+  {day:29, morning:"Zak 10–12",        evening:"Wahyu 20"},
+  {day:30, morning:"Zak 13–14",        evening:"Wahyu 21"},
+  {day:31, morning:"Maleakhi 1–4",     evening:"Wahyu 22"},
+];
 
-  function setState(s) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
-  }
+/* ---------------------------------------------------
+   RENDER DAY LIST
+--------------------------------------------------- */
 
-  function isMobile() {
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  }
+const STORAGE_KEY = "lesenplan-darkluxe";
+const dayListEl = document.getElementById("dayList");
+const progressTextEl = document.getElementById("progressText");
+const progressFillEl = document.getElementById("progressFill");
 
-  const youvBookMap = {
-    "Hes": "EZK",
-    "Dan": "DAN",
-    "Hos": "HOS",
-    "Joel": "JOL",
-    "Amos": "AMO",
-    "Obadja": "OBA",
-    "Jona": "JON",
-    "Micha": "MIC",
-    "Nahum": "NAH",
-    "Habakuk": "HAB",
-    "Zefanja": "ZEP",
-    "Haggai": "HAG",
-    "Sach": "ZEC",
-    "Maleachi": "MAL",
-    "Hebr": "HEB",
-    "Jak":  "JAS",
-    "Judas":"JUD",
-    "Offb": "REV"
-  };
+function getState() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : {};
+}
 
-  function parseReference(refText) {
-    if (!refText) return null;
-    const parts = refText.split(/\s+/, 2);
-    if (parts.length < 2) return null;
+function setState(s) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
 
-    const bookToken = parts[0];
-    const rest = parts[1];
+function render() {
+  const state = getState();
+  dayListEl.innerHTML = "";
+  let doneCount = 0;
 
-    const bookCode = youvBookMap[bookToken];
-    if (!bookCode) return null;
+  const today = new Date();
+  const isDec2025 =
+    today.getFullYear() === 2025 && today.getMonth() === 11;
+  const todayDay = isDec2025 ? today.getDate() : null;
 
-    const match = rest.match(/(\d+)/);
-    if (!match) return null;
+  plan.forEach(({ day, morning, evening }) => {
+    const done = state[day]?.done ?? false;
+    if (done) doneCount++;
 
-    const chapter = match[1];
-    return { bookCode, chapter };
-  }
+    const card = document.createElement("div");
+    card.className = "day-card";
 
-  function openBibleReference(refText) {
-    const parsed = parseReference(refText);
-    if (!parsed) {
-      alert("Ayat ini belum bisa dikenali otomatis.");
-      return;
+    if (todayDay && day === todayDay) {
+      card.classList.add("today");
+      const badge = document.createElement("div");
+      badge.className = "today-badge";
+      badge.textContent = "Hari ini";
+      card.appendChild(badge);
     }
 
-    const { bookCode, chapter } = parsed;
+    const num = document.createElement("div");
+    num.className = "day-num";
+    num.textContent = day;
 
-    // TB = 116, Luther 2017 = 51 (kamu bisa ganti sesuai keinginan)
-    const desktopUrl = `https://www.bible.com/bible/116/${bookCode}.${chapter}.TB`;
-    const mobileUrl  = `youversion://bible?reference=${bookCode}.${chapter}`;
+    const content = document.createElement("div");
+    content.style.flex = "1";
 
-    const finalUrl = isMobile() ? mobileUrl : desktopUrl;
-    window.open(finalUrl, "_blank", "noopener");
-  }
+    const title = document.createElement("div");
+    title.className = "day-title";
+    title.textContent = `Hari ${day}`;
 
-  function render() {
-    const state = getState();
-    dayListEl.innerHTML = "";
-    let doneCount = 0;
+    const rowM = document.createElement("div");
+    rowM.className = "day-ref-row";
 
-    const today = new Date();
-    const isDec2025 = today.getFullYear() === 2025 && today.getMonth() === 11;
-    const todayDay = isDec2025 ? today.getDate() : null;
+    const labelM = document.createElement("span");
+    labelM.className = "day-ref-label";
+    labelM.textContent = "Pagi";
 
-    plan.forEach(({ day, morning, evening }) => {
-      const done = state[day]?.done ?? false;
-      if (done) doneCount++;
+    const textM = document.createElement("button");
+    textM.className = "ref-link-text";
+    textM.type = "button";
+    textM.textContent = morning;
+    textM.onclick = () => openBibleReference(morning);
 
-      const card = document.createElement("div");
-      card.className = "day-card";
+    rowM.appendChild(labelM);
+    rowM.appendChild(textM);
 
-      if (todayDay && day === todayDay) {
-        const badge = document.createElement("div");
-        badge.className = "today-badge";
-        badge.textContent = "Hari ini";
-        card.appendChild(badge);
-      }
+    const rowE = document.createElement("div");
+    rowE.className = "day-ref-row";
 
-      const num = document.createElement("div");
-      num.className = "day-num";
-      num.textContent = day;
+    const labelE = document.createElement("span");
+    labelE.className = "day-ref-label";
+    labelE.textContent = "Malam";
 
-      const content = document.createElement("div");
-      content.style.flex = "1";
+    const textE = document.createElement("button");
+    textE.className = "ref-link-text";
+    textE.type = "button";
+    textE.textContent = evening;
+    textE.onclick = () => openBibleReference(evening);
 
-      const title = document.createElement("div");
-      title.className = "day-title";
-      title.textContent = `Hari ${day}`;
+    rowE.appendChild(labelE);
+    rowE.appendChild(textE);
 
-      const rowM = document.createElement("div");
-      rowM.className = "day-ref-row";
+    content.appendChild(title);
+    content.appendChild(rowM);
+    content.appendChild(rowE);
 
-      const labelM = document.createElement("span");
-      labelM.className = "day-ref-label";
-      labelM.textContent = "Pagi";
+    const actions = document.createElement("div");
+    actions.style.display = "flex";
+    actions.style.flexDirection = "column";
+    actions.style.gap = "6px";
 
-      const textM = document.createElement("button");
-      textM.className = "ref-link-text";
-      textM.textContent = morning;
-      textM.onclick = () => openBibleReference(morning);
+    const btn = document.createElement("button");
+    btn.className = "btn-small";
+    btn.textContent = done ? "Selesai" : "Belum";
+    if (done) btn.classList.add("is-done");
 
-      rowM.appendChild(labelM);
-      rowM.appendChild(textM);
-
-      const rowE = document.createElement("div");
-      rowE.className = "day-ref-row";
-
-      const labelE = document.createElement("span");
-      labelE.className = "day-ref-label";
-      labelE.textContent = "Malam";
-
-      const textE = document.createElement("button");
-      textE.className = "ref-link-text";
-      textE.textContent = evening;
-      textE.onclick = () => openBibleReference(evening);
-
-      rowE.appendChild(labelE);
-      rowE.appendChild(textE);
-
-      content.appendChild(title);
-      content.appendChild(rowM);
-      content.appendChild(rowE);
-
-      const actions = document.createElement("div");
-      actions.style.display = "flex";
-      actions.style.flexDirection = "column";
-      actions.style.gap = "6px";
-
-      const btn = document.createElement("button");
-      btn.className = "btn-small";
-      btn.textContent = done ? "Selesai" : "Belum";
-      if (done) btn.classList.add("is-done");
-
-      btn.onclick = () => {
-        const s = getState();
-        if (s[day]?.done) {
-          delete s[day];
-        } else {
-          s[day] = { done: true, ts: Date.now() };
-        }
-        setState(s);
-        render();
-      };
-
-      const focusBtn = document.createElement("button");
-      focusBtn.className = "btn-small";
-      focusBtn.textContent = "Baca dalam fokus";
-      focusBtn.onclick = () => openFocus(day, morning, evening);
-
-      const reset = document.createElement("span");
-      reset.className = "reset-link";
-      reset.textContent = "Reset";
-      reset.onclick = () => {
-        const s = getState();
-        delete s[day];
-        setState(s);
-        render();
-      };
-
-      actions.appendChild(btn);
-      actions.appendChild(focusBtn);
-      actions.appendChild(reset);
-
-      card.appendChild(num);
-      card.appendChild(content);
-      card.appendChild(actions);
-
-      dayListEl.appendChild(card);
-    });
-
-    const percent = Math.round((doneCount / plan.length) * 100);
-    progressTextEl.textContent = `${doneCount} dari ${plan.length} hari selesai (${percent}%).`;
-    progressFillEl.style.width = percent + "%";
-  }
-
-  render();
-
-  /* FOCUS MODE */
-  const focusOverlay = document.getElementById("focusOverlay");
-  const focusClose = document.getElementById("focusClose");
-  const focusDateEl = document.getElementById("focusDate");
-  const focusTitleEl = document.getElementById("focusTitle");
-  const focusMorningEl = document.getElementById("focusMorning");
-  const focusEveningEl = document.getElementById("focusEvening");
-
-  function openFocus(day, morning, evening) {
-    focusTitleEl.textContent = `Hari ${day}`;
-    focusMorningEl.textContent = `Pagi: ${morning}`;
-    focusEveningEl.textContent = `Malam: ${evening}`;
-    focusDateEl.textContent = `Desember 2025 – Hari ${day}`;
-    focusOverlay.classList.add("is-open");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeFocus() {
-    focusOverlay.classList.remove("is-open");
-    document.body.style.overflow = "";
-  }
-
-  focusClose.onclick = closeFocus;
-  focusOverlay.addEventListener("click", (e) => {
-    if (e.target === focusOverlay) closeFocus();
-  });
-
-  /* TAB SWITCHING */
-  document.querySelectorAll(".nav-tab").forEach(btn => {
     btn.onclick = () => {
-      document.querySelector(".nav-tab.is-active").classList.remove("is-active");
-      btn.classList.add("is-active");
-      document.querySelector(".tab-section.active").classList.remove("active");
-      document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+      const s = getState();
+      if (s[day]?.done) {
+        delete s[day];
+      } else {
+        s[day] = { done: true, ts: Date.now() };
+      }
+      setState(s);
+      render();
     };
+
+    const focusBtn = document.createElement("button");
+    focusBtn.className = "btn-small";
+    focusBtn.textContent = "Baca dalam fokus";
+    focusBtn.onclick = () => openFocus(day, morning, evening);
+
+    const reset = document.createElement("span");
+    reset.className = "reset-link";
+    reset.textContent = "Reset";
+    reset.onclick = () => {
+      const s = getState();
+      delete s[day];
+      setState(s);
+      render();
+    };
+
+    actions.appendChild(btn);
+    actions.appendChild(focusBtn);
+    actions.appendChild(reset);
+
+    card.appendChild(num);
+    card.appendChild(content);
+    card.appendChild(actions);
+
+    dayListEl.appendChild(card);
   });
 
-  /* THEME TOGGLE */
-  const themeBtn = document.getElementById("theme-toggle");
-  if (localStorage.getItem("theme-id") === "light") {
+  const percent = Math.round((doneCount / plan.length) * 100);
+  progressTextEl.textContent =
+    `${doneCount} dari ${plan.length} hari selesai (${percent}%).`;
+  progressFillEl.style.width = percent + "%";
+}
+
+render();
+
+/* ---------------------------------------------------
+   YOUVERSION AUTO-ROUTING (MOBILE vs DESKTOP)
+--------------------------------------------------- */
+
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+const youvBookMap = {
+  "Yeh":      "EZK",
+  "Dan":      "DAN",
+  "Hos":      "HOS",
+  "Yoel":     "JOL",
+  "Amos":     "AMO",
+  "Obaja":    "OBA",
+  "Yunus":    "JON",
+  "Mikha":    "MIC",
+  "Nahum":    "NAH",
+  "Habakuk":  "HAB",
+  "Zefanya":  "ZEP",
+  "Hagai":    "HAG",
+  "Zak":      "ZEC",
+  "Maleakhi":"MAL",
+
+  "Ibr":   "HEB",
+  "Yak":   "JAS",
+  "Yudas": "JUD",
+  "Wahyu": "REV"
+};
+
+function parseReference(refText) {
+  if (!refText) return null;
+  const parts = refText.split(/\s+/, 2);
+  if (parts.length < 2) return null;
+
+  const bookToken = parts[0];
+  const rest = parts[1];
+
+  const bookCode = youvBookMap[bookToken];
+  if (!bookCode) return null;
+
+  const match = rest.match(/(\d+)/);
+  if (!match) return null;
+
+  const chapter = match[1];
+  return { bookCode, chapter };
+}
+
+function openBibleReference(refText) {
+  const parsed = parseReference(refText);
+  if (!parsed) {
+    alert("Ayat Alkitab ini belum dapat dikenali secara otomatis.");
+    return;
+  }
+
+  const { bookCode, chapter } = parsed;
+
+  // TB = 116, kode kitab: ENG bookCode (REV, HEB, dll.)
+  const desktopUrl = `https://www.bible.com/bible/116/${bookCode}.${chapter}.TB`;
+  const mobileUrl  = `youversion://bible?reference=${bookCode}.${chapter}`;
+
+  const finalUrl = isMobile() ? mobileUrl : desktopUrl;
+  window.open(finalUrl, "_blank", "noopener");
+}
+
+/* ---------------------------------------------------
+   FOCUS MODE
+--------------------------------------------------- */
+
+const focusOverlay = document.getElementById("focusOverlay");
+const focusClose = document.getElementById("focusClose");
+const focusDateEl = document.getElementById("focusDate");
+const focusTitleEl = document.getElementById("focusTitle");
+const focusMorningEl = document.getElementById("focusMorning");
+const focusEveningEl = document.getElementById("focusEvening");
+
+function openFocus(day, morning, evening) {
+  focusTitleEl.textContent = `Hari ${day}`;
+  focusMorningEl.textContent = `Pagi: ${morning}`;
+  focusEveningEl.textContent = `Malam: ${evening}`;
+  focusDateEl.textContent = `Desember 2025 – Hari ${day}`;
+
+  focusOverlay.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeFocus() {
+  focusOverlay.classList.remove("is-open");
+  document.body.style.overflow = "";
+}
+
+focusClose.onclick = () => {
+  closeFocus();
+};
+
+focusOverlay.addEventListener("click", (e) => {
+  if (e.target === focusOverlay) {
+    closeFocus();
+  }
+});
+
+/* ---------------------------------------------------
+   TAB SWITCHING
+--------------------------------------------------- */
+
+document.querySelectorAll(".nav-tab").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelector(".nav-tab.is-active").classList.remove("is-active");
+    btn.classList.add("is-active");
+
+    document.querySelector(".tab-section.active").classList.remove("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  };
+});
+
+/* ---------------------------------------------------
+   THEME TOGGLE
+--------------------------------------------------- */
+
+const themeBtn = document.getElementById("theme-toggle");
+
+if (localStorage.getItem("theme") === "light") {
+  document.body.dataset.theme = "light";
+  themeBtn.textContent = "🌙";
+}
+
+themeBtn.onclick = () => {
+  if (document.body.dataset.theme === "light") {
+    document.body.removeAttribute("data-theme");
+    localStorage.setItem("theme", "dark");
+    themeBtn.textContent = "☀";
+  } else {
     document.body.dataset.theme = "light";
+    localStorage.setItem("theme", "light");
     themeBtn.textContent = "🌙";
   }
-  themeBtn.onclick = () => {
-    if (document.body.dataset.theme === "light") {
-      document.body.removeAttribute("data-theme");
-      localStorage.setItem("theme-id", "dark");
-      themeBtn.textContent = "☀";
-    } else {
-      document.body.dataset.theme = "light";
-      localStorage.setItem("theme-id", "light");
-      themeBtn.textContent = "🌙";
-    }
-  };
+};
 
-  /* JOURNAL */
-  const journalDaySelect = document.getElementById("journal-day");
-  const journalText = document.getElementById("journal-text");
-  const journalStatus = document.getElementById("journal-status");
-  const JOURNAL_KEY = "journal-id";
+/* ---------------------------------------------------
+   JOURNAL PER HARI
+--------------------------------------------------- */
 
-  let journalStore = {};
-  try {
-    const saved = localStorage.getItem(JOURNAL_KEY);
-    journalStore = saved ? JSON.parse(saved) : {};
-  } catch {
-    journalStore = {};
-  }
+const journalDaySelect = document.getElementById("journal-day");
+const journalText = document.getElementById("journal-text");
+const journalStatus = document.getElementById("journal-status");
+const JOURNAL_KEY = "journal-darkluxe-v2";
 
+let journalStore = {};
+try {
+  const saved = localStorage.getItem(JOURNAL_KEY);
+  journalStore = saved ? JSON.parse(saved) : {};
+} catch {
+  journalStore = {};
+}
+
+if (journalDaySelect) {
   plan.forEach(({ day }) => {
     const opt = document.createElement("option");
     opt.value = String(day);
@@ -804,54 +917,85 @@
     journalDaySelect.appendChild(opt);
   });
 
-  function loadJournalForDay(day) {
-    journalText.value = journalStore[day] || "";
+  const t = new Date();
+  if (t.getFullYear() === 2025 && t.getMonth() === 11) {
+    const dd = t.getDate();
+    const opt = [...journalDaySelect.options].find(o => Number(o.value) === dd);
+    if (opt) journalDaySelect.value = String(dd);
   }
+}
 
-  loadJournalForDay(journalDaySelect.value || "1");
+function loadJournalForDay(day) {
+  journalText.value = journalStore[day] || "";
+}
+
+if (journalDaySelect) {
+  loadJournalForDay(journalDaySelect.value);
 
   journalDaySelect.addEventListener("change", () => {
     loadJournalForDay(journalDaySelect.value);
     journalStatus.textContent = "";
   });
+}
 
-  document.getElementById("journal-save").onclick = () => {
-    const day = journalDaySelect.value;
-    journalStore[day] = journalText.value || "";
-    localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalStore));
-    journalStatus.textContent = "Tersimpan ✓";
-  };
+document.getElementById("journal-save").onclick = () => {
+  const day = journalDaySelect.value;
+  journalStore[day] = journalText.value || "";
+  localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalStore));
+  journalStatus.textContent = "Tersimpan ✓";
+};
 
-  /* LANGUAGE SWITCHER */
-  const langBtn = document.getElementById("lang-toggle");
-  const isIndo = window.location.pathname.includes("index-id.html");
-  langBtn.textContent = isIndo ? "DE" : "ID";
-  langBtn.onclick = () => {
-    const path = window.location.pathname;
-    if (path.includes("index-id.html")) {
-      window.location.href = "index.html";
-    } else {
-      window.location.href = "index-id.html";
-    }
-  };
+/* ---------------------------------------------------
+   LANGUAGE SWITCHER (DE ⇄ ID)
+--------------------------------------------------- */
 
-  /* MUSIC PLAYER */
-  const player = document.getElementById("player");
-  const musicSelect = document.getElementById("music-select");
-  const musicSources = {
-    ambient: "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3"
-  };
+const langBtn = document.getElementById("lang-toggle");
+const isIndo = window.location.pathname.includes("index-id.html");
 
-  function setMusicFromSelect(autoPlay = false) {
-    const src = musicSources[musicSelect.value];
-    if (!src) return;
-    player.src = src;
-    if (autoPlay) {
-      player.play().catch(() => {});
-    }
+if (isIndo) {
+  langBtn.textContent = "DE";
+} else {
+  langBtn.textContent = "ID";
+}
+
+langBtn.onclick = () => {
+  const path = window.location.pathname;
+
+  if (path.includes("index-id.html")) {
+    window.location.href = "index.html";
+  } else {
+    window.location.href = "index-id.html";
   }
-  setMusicFromSelect(false);
-  musicSelect.addEventListener("change", () => setMusicFromSelect(true));
+};
+
+/* ---------------------------------------------------
+   MUSIC PLAYER
+--------------------------------------------------- */
+
+const player = document.getElementById("player");
+const musicSelect = document.getElementById("music-select");
+
+const musicSources = {
+  ambient: "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3"
+};
+
+function setMusicFromSelect(autoPlay = false) {
+  const src = musicSources[musicSelect.value];
+  if (!src) return;
+  player.src = src;
+  if (autoPlay) {
+    player.play().catch(() => {
+      // kalau browser block autoplay, user bisa tekan play manual
+    });
+  }
+}
+
+setMusicFromSelect(false);
+
+musicSelect.addEventListener("change", () => {
+  setMusicFromSelect(true);
+});
+
 </script>
 
 </body>

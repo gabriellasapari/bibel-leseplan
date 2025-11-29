@@ -312,6 +312,9 @@ h1 {
 <div class="page">
 
   <div class="header-actions">
+  <button id="lang-toggle" class="header-btn">ID</button>
+  <select id="music-select" class="music-select">
+
     <select id="music-select" class="music-select">
       <option value="ambient">Ambient Worship</option>
     </select>
@@ -687,6 +690,33 @@ document.getElementById("journal-save").onclick = () => {
   journalStore[journalDaySelect.value] = journalText.value || "";
   localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalStore));
   journalStatus.textContent = "Tersimpan ✓";
+};
+
+   /* ---------------------------------------------------
+   LANGUAGE SWITCHER (DE ⇄ ID)
+--------------------------------------------------- */
+
+const langBtn = document.getElementById("lang-toggle");
+
+// Apakah sedang di versi Indonesia (index-id.html)?
+const isIndo = window.location.pathname.includes("index-id.html");
+
+if (isIndo) {
+  langBtn.textContent = "DE";   // kalau lagi di versi Indonesia
+} else {
+  langBtn.textContent = "ID";   // kalau lagi di versi Jerman
+}
+
+langBtn.onclick = () => {
+  const path = window.location.pathname;
+
+  if (path.includes("index-id.html")) {
+    // dari Indonesia -> ke Jerman
+    window.location.href = "index.html";
+  } else {
+    // dari Jerman -> ke Indonesia
+    window.location.href = "index-id.html";
+  }
 };
 
 /* ---------------------------------------------

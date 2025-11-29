@@ -453,11 +453,8 @@ h1 {
   <!-- HEADER BUTTONS -->
   <div class="header-actions">
     <select id="music-select" class="music-select">
-      <option value="ambient">Ambient Worship</option>
-      <option value="piano">Piano Worship</option>
-      <option value="harp">Harp / Soaking</option>
-      <option value="nature">Nature (Rain/River)</option>
-    </select>
+  <option value="ambient">Ambient Worship</option>
+</select>
     <button id="theme-toggle" class="header-btn">☀</button>
   </div>
 
@@ -997,10 +994,7 @@ const player = document.getElementById("player");
 const musicSelect = document.getElementById("music-select");
 
 const musicSources = {
-  ambient:  "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3",
-  piano:    "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/piano-worship.mp3",
-  harp:     "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/harp-soaking.mp3",
-  nature:   "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/nature-rain-river.mp3"
+  ambient: "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3"
 };
 
 function setMusicFromSelect(autoPlay = false) {

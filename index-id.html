@@ -1,1 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>31 Hari Bersama Yesus – Rencana Bacaan Alkitab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+
+/* ---------------------------------------------------
+   DARK LUXE (BLACK + GOLD) UI
+--------------------------------------------------- */
+
+:root {
+  --bg: #0c0c0c;
+  --card-bg: #141414;
+  --text: #e8e8e8;
+  --muted: #9c9c9c;
+  --gold: #d4af37;
+  --gold-soft: #a98b2c;
+  --border: #2a2a2a;
+  --radius: 14px;
+}
+
+/* LIGHT MODE */
+body[data-theme="light"] {
+  --bg: #f7f6ee;
+  --card-bg: #ffffff;
+  --text: #1f1f1f;
+  --muted: #5a5a5a;
+  --gold: #ba8d1a;
+  --border: #e0d8c2;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------------------------------------------------
+   PAGE WRAPPER
+--------------------------------------------------- */
+
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+}
+
+/* ---------------------------------------------------
+   HEADER BUTTONS
+--------------------------------------------------- */
+
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.header-btn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.header-btn:hover {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
+
+/* ---------------------------------------------------
+   TITLE
+--------------------------------------------------- */
+
+h1 {
+  margin: 12px 0 6px;
+  font-size: 32px;
+  color: var(--gold);
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.intro-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  line-height: 1.5rem;
+  margin-top: 16px;
+  box-shadow: 0 0 22px rgba(212,175,55,0.05);
+}
+
+/* ---------------------------------------------------
+   NAVIGATION
+--------------------------------------------------- */
+
+.main-nav {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 14px;
+}
+
+.nav-tab:hover {
+  background: var(--gold);
+  color: black;
+}
+
+.nav-tab.is-active {
+  background: var(--gold);
+  color: black;
+  box-shadow: 0 0 12px rgba(212,175,55,0.6);
+}
+
+/* ---------------------------------------------------
+   TAB SECTIONS
+--------------------------------------------------- */
+
+.tab-section {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+/* ---------------------------------------------------
+   DAY LIST
+--------------------------------------------------- */
+
+.layout {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+}
+
+@media(max-width: 850px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: var(--radius);
+}
+
+.day-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.day-card {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: #111;
+  border: 1px solid #222;
+  transition: 0.2s;
+}
+
+.day-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212,175,55,0.15);
+}
+
+.day-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.day-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.day-ref-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.day-ref-label {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.4);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+}
+
+.ref-link {
+  color: var(--gold);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.ref-link:hover {
+  opacity: 0.75;
+}
+
+/* progress bar */
+
+.progress-bar {
+  height: 12px;
+  background: #333;
+  border-radius: 999px;
+  border: 1px solid #555;
+  margin-top: 6px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), #f0d98a);
+  border-radius: 999px;
+  transition: width 0.35s ease-out;
+}
+
+.bible-note {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.about-card,
+.journal-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.journal-textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #111;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.journal-save-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+}
+
+.music-select {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: #111;
+  color: var(--gold);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="header-actions">
+    <select id="music-select" class="music-select">
+      <option value="ambient">Ambient Worship</option>
+    </select>
+    <button id="theme-toggle" class="header-btn">☀</button>
+  </div>
+
+  <h1>31 Hari Bersama Yesus</h1>
+  <p class="subtitle">Rencana Bacaan Alkitab – Desember 2025</p>
+
+  <div class="intro-card">
+    Luangkan waktu <strong>10–20 menit</strong> setiap hari untuk membaca, merenungkan, dan berdoa.  
+    Tekuni firman Tuhan setiap hari.  
+    Kemajuanmu disimpan secara lokal di browsermu.
+  </div>
+
+  <!-- NAV -->
+  <nav class="main-nav">
+    <button class="nav-tab is-active" data-tab="lesenplan">📖 Rencana Bacaan</button>
+    <button class="nav-tab" data-tab="about">👤 Tentang Saya</button>
+    <button class="nav-tab" data-tab="journal">📝 Jurnal</button>
+  </nav>
+
+  <!-- TAB: READING PLAN -->
+  <div id="tab-lesenplan" class="tab-section active">
+    <div class="layout">
+
+      <section class="card">
+        <h2>Pilih Hari</h2>
+        <div class="day-list" id="dayList"></div>
+      </section>
+
+      <aside class="card">
+        <h2>Kemajuanmu</h2>
+        <p id="progressText">0 dari 31 hari selesai (0%).</p>
+        <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+
+        <p class="bible-note">
+          Untuk teks Alkitab, kami menggunakan
+          <a href="https://www.bible.com/app" target="_blank" rel="noopener noreferrer">
+            YouVersion Bible App
+          </a>.
+        </p>
+      </aside>
+    </div>
+  </div>
+
+  <!-- TAB: ABOUT -->
+  <div id="tab-about" class="tab-section">
+    <div class="about-card">
+      <h2 style="color:var(--gold)">Tentang Saya</h2>
+      <p>
+        Saya Gabriella, tinggal di Austria. Saya berasal dari Papua Barat, Indonesia,
+        dan adalah pengikut Yesus Kristus.
+      </p>
+      <p>
+        Saya berasal dari keluarga yang memiliki iman yang kuat kepada Tuhan Yesus,
+        dan iman itu membentuk hidup saya sejak kecil.
+      </p>
+      <p>
+        Jika kamu ingin berbagi kesaksian atau punya pertanyaan,
+        kamu dapat menghubungi saya melalui Instagram  
+        <strong>@gabriellasapari</strong>  
+        atau email: gabriellaasw94@gmail.com
+      </p>
+    </div>
+  </div>
+
+  <!-- TAB: JOURNAL -->
+  <div id="tab-journal" class="tab-section">
+    <div class="journal-card">
+      <h2 style="color:var(--gold)">Jurnal & Doa</h2>
+
+      <div class="journal-controls">
+        <label for="journal-day">Hari:</label>
+        <select id="journal-day"></select>
+      </div>
+
+      <textarea id="journal-text" class="journal-textarea" placeholder="Apa yang Tuhan sampaikan hari ini?"></textarea>
+
+      <button id="journal-save" class="journal-save-btn">Simpan</button>
+      <p id="journal-status" style="font-size:12px;color:var(--muted);margin-top:6px;"></p>
+    </div>
+  </div>
+
+  <footer style="text-align:center;margin-top:30px;font-size:12px;color:var(--muted)">
+    Dibuat dengan kasih oleh Gabriella
+  </footer>
+
+</div>
+
+<audio id="player" preload="auto"></audio>
+
+<script>
+
+/* ---------------------------------------------------
+   RENCANA BACAan 31 Hari
+--------------------------------------------------- */
+
+const plan = [
+{day:1, morning:"Hes 45–46", evening:"Ibr 11,20–40"},
+{day:2, morning:"Hes 47–48", evening:"Ibr 12"},
+{day:3, morning:"Dan 1–2", evening:"Ibr 13"},
+{day:4, morning:"Dan 3–4", evening:"Yak 1"},
+{day:5, morning:"Dan 5–6", evening:"Yak 2"},
+{day:6, morning:"Dan 7–8", evening:"Yak 3"},
+{day:7, morning:"Dan 9–10", evening:"Yak 4"},
+{day:8, morning:"Dan 11–12", evening:"Yak 5"},
+{day:9, morning:"Hos 1–4", evening:"Yudas"},
+{day:10, morning:"Hos 5–8", evening:"Why 1"},
+{day:11, morning:"Hos 9–11", evening:"Why 2"},
+{day:12, morning:"Hos 12–14", evening:"Why 3"},
+{day:13, morning:"Yoel 1–4", evening:"Why 4"},
+{day:14, morning:"Amos 1–3", evening:"Why 5"},
+{day:15, morning:"Amos 4–6", evening:"Why 6"},
+{day:16, morning:"Amos 7–9", evening:"Why 7"},
+{day:17, morning:"Obaja", evening:"Why 8"},
+{day:18, morning:"Yunus", evening:"Why 9"},
+{day:19, morning:"Mi 1–3", evening:"Why 10"},
+{day:20, morning:"Mi 4–5", evening:"Why 11"},
+{day:21, morning:"Mi 6–7", evening:"Why 12"},
+{day:22, morning:"Nahum", evening:"Why 13"},
+{day:23, morning:"Habakuk", evening:"Why 14"},
+{day:24, morning:"Zefanya", evening:"Why 15"},
+{day:25, morning:"Hagai", evening:"Why 16"},
+{day:26, morning:"Zak 1–3", evening:"Why 17"},
+{day:27, morning:"Zak 4–6", evening:"Why 18"},
+{day:28, morning:"Zak 7–9", evening:"Why 19"},
+{day:29, morning:"Zak 10–12", evening:"Why 20"},
+{day:30, morning:"Zak 13–14", evening:"Why 21"},
+{day:31, morning:"Maleakhi", evening:"Why 22"},
+];
+
+/* -------------------------
+   RENDER
+------------------------- */
+
+const STORAGE_KEY = "lesenplan-id";
+const dayListEl = document.getElementById("dayList");
+const progressTextEl = document.getElementById("progressText");
+const progressFillEl = document.getElementById("progressFill");
+
+function getState() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : {};
+}
+
+function setState(s) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+
+function render() {
+  const state = getState();
+  dayListEl.innerHTML = "";
+  let doneCount = 0;
+
+  const today = new Date();
+  const isDec2025 = today.getFullYear() === 2025 && today.getMonth() === 11;
+  const todayDay = isDec2025 ? today.getDate() : null;
+
+  plan.forEach(({ day, morning, evening }) => {
+    const done = state[day]?.done ?? false;
+    if (done) doneCount++;
+
+    const card = document.createElement("div");
+    card.className = "day-card";
+
+    if (todayDay && today === todayDay) card.classList.add("today");
+
+    const num = document.createElement("div");
+    num.className = "day-num";
+    num.textContent = day;
+
+    const content = document.createElement("div");
+    content.style.flex = "1";
+
+    const title = document.createElement("div");
+    title.className = "day-title";
+    title.textContent = `Hari ${day}`;
+
+    function createRow(label, text) {
+      const row = document.createElement("div");
+      row.className = "day-ref-row";
+
+      const l = document.createElement("span");
+      l.className = "day-ref-label";
+      l.textContent = label;
+
+      const link = document.createElement("span");
+      link.className = "ref-link";
+      link.textContent = text;
+      link.onclick = () => openBibleReference(text);
+
+      row.appendChild(l);
+      row.appendChild(link);
+      return row;
+    }
+
+    const rowM = createRow("Pagi", morning);
+    const rowE = createRow("Malam", evening);
+
+    content.appendChild(title);
+    content.appendChild(rowM);
+    content.appendChild(rowE);
+
+    const actions = document.createElement("div");
+    actions.style.display = "flex";
+    actions.style.flexDirection = "column";
+    actions.style.gap = "6px";
+
+    const btn = document.createElement("button");
+    btn.className = "btn-small";
+    btn.textContent = done ? "Selesai" : "Belum";
+    if (done) btn.classList.add("is-done");
+
+    btn.onclick = () => {
+      const s = getState();
+      if (s[day]?.done) delete s[day];
+      else s[day] = { done: true };
+      setState(s);
+      render();
+    };
+
+    const reset = document.createElement("span");
+    reset.className = "reset-link";
+    reset.textContent = "Reset";
+    reset.onclick = () => {
+      const s = getState();
+      delete s[day];
+      setState(s);
+      render();
+    };
+
+    actions.appendChild(btn);
+    actions.appendChild(reset);
+
+    card.appendChild(num);
+    card.appendChild(content);
+    card.appendChild(actions);
+
+    dayListEl.appendChild(card);
+  });
+
+  const percent = Math.round((doneCount / plan.length) * 100);
+  progressTextEl.textContent = `${doneCount} dari ${plan.length} hari selesai (${percent}%).`;
+  progressFillEl.style.width = percent + "%";
+}
+
+render();
+
+/* ---------------------------------------------
+   YOUVERSION AUTO ROUTE INDONESIA
+--------------------------------------------- */
+
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+const youvBookMap = {
+  "Hes": "EZK",
+  "Dan": "DAN",
+  "Hos": "HOS",
+  "Yoel": "JOL",
+  "Amos": "AMO",
+  "Obaja": "OBA",
+  "Yunus": "JON",
+  "Mi": "MIC",
+  "Nahum": "NAH",
+  "Habakuk": "HAB",
+  "Zefanya": "ZEP",
+  "Hagai": "HAG",
+  "Zak": "ZEC",
+  "Maleakhi": "MAL",
+
+  "Ibr": "HEB",
+  "Yak": "JAS",
+  "Yudas": "JUD",
+  "Why": "REV"
+};
+
+function parseReference(refText) {
+  const parts = refText.split(/\s+/, 2);
+  if (parts.length < 2) return null;
+
+  const book = youvBookMap[parts[0]];
+  if (!book) return null;
+
+  const match = parts[1].match(/(\d+)/);
+  if (!match) return null;
+
+  return { book, chapter: match[1] };
+}
+
+function openBibleReference(refText) {
+  const parsed = parseReference(refText);
+  if (!parsed) return alert("Ayat tidak dikenali.");
+
+  const { book, chapter } = parsed;
+
+  const desktopUrl = `https://www.bible.com/bible/116/${book}.${chapter}.TB`;
+  const mobileUrl  = `youversion://bible?reference=${book}.${chapter}`;
+
+  window.open(isMobile() ? mobileUrl : desktopUrl, "_blank");
+}
+
+/* ---------------------------------------------
+   TAB SWITCHING
+--------------------------------------------- */
+
+document.querySelectorAll(".nav-tab").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelector(".nav-tab.is-active").classList.remove("is-active");
+    btn.classList.add("is-active");
+
+    document.querySelector(".tab-section.active").classList.remove("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  };
+});
+
+/* ---------------------------------------------
+   THEME TOGGLE
+--------------------------------------------- */
+
+const themeBtn = document.getElementById("theme-toggle");
+
+if (localStorage.getItem("theme-id") === "light") {
+  document.body.dataset.theme = "light";
+  themeBtn.textContent = "🌙";
+}
+
+themeBtn.onclick = () => {
+  if (document.body.dataset.theme === "light") {
+    document.body.removeAttribute("data-theme");
+    localStorage.setItem("theme-id", "dark");
+    themeBtn.textContent = "☀";
+  } else {
+    document.body.dataset.theme = "light";
+    localStorage.setItem("theme-id", "light");
+    themeBtn.textContent = "🌙";
+  }
+};
+
+/* ---------------------------------------------
+   JOURNAL
+--------------------------------------------- */
+
+const journalDaySelect = document.getElementById("journal-day");
+const journalText = document.getElementById("journal-text");
+const journalStatus = document.getElementById("journal-status");
+const JOURNAL_KEY = "journal-id";
+
+let journalStore = {};
+try {
+  journalStore = JSON.parse(localStorage.getItem(JOURNAL_KEY)) || {};
+} catch {
+  journalStore = {};
+}
+
+plan.forEach(({ day }) => {
+  const opt = document.createElement("option");
+  opt.value = String(day);
+  opt.textContent = `Hari ${day}`;
+  journalDaySelect.appendChild(opt);
+});
+
+journalDaySelect.addEventListener("change", () => {
+  journalText.value = journalStore[journalDaySelect.value] || "";
+  journalStatus.textContent = "";
+});
+
+journalText.value = journalStore[journalDaySelect.value] || "";
+
+document.getElementById("journal-save").onclick = () => {
+  journalStore[journalDaySelect.value] = journalText.value || "";
+  localStorage.setItem(JOURNAL_KEY, JSON.stringify(journalStore));
+  journalStatus.textContent = "Tersimpan ✓";
+};
+
+/* ---------------------------------------------
+   MUSIC PLAYER (Ambient Only)
+--------------------------------------------- */
+
+const player = document.getElementById("player");
+player.src = "https://raw.githubusercontent.com/gabriellasapari/bibel-leseplan/main/ambient-worship-music-112199.mp3";
+
+</script>
+
+</body>
+</html>
 

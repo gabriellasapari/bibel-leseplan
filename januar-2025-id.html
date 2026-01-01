@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>31 Hari Bersama Yesus – Januari 2025</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+:root {
+  --bg:#0c0c0c; --card-bg:#141414; --text:#e8e8e8;
+  --muted:#9c9c9c; --gold:#d4af37; --border:#2a2a2a;
+  --radius:14px;
+}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.page{max-width:980px;margin:auto;padding:28px 18px 60px}
+
+/* HEADER */
+.header-actions{display:flex;justify-content:flex-end;gap:10px}
+.header-btn{
+  padding:7px 14px;border-radius:999px;
+  border:1px solid var(--gold);
+  background:#111;color:var(--gold);
+  cursor:pointer;font-weight:600
+}
+
+/* TITLE */
+h1{color:var(--gold);font-size:32px;margin:12px 0 6px}
+.subtitle{color:var(--muted);font-size:14px}
+.intro-card{background:var(--card-bg);border:1px solid var(--border);
+  padding:16px 20px;border-radius:var(--radius);margin-top:16px}
+
+/* NAV */
+.main-nav{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.nav-tab{padding:8px 18px;border-radius:999px;
+  border:1px solid var(--border);background:var(--card-bg);cursor:pointer}
+.nav-tab.is-active{background:var(--gold);color:#000}
+
+/* TABS */
+.tab-section{display:none}
+.tab-section.active{display:block}
+
+/* LAYOUT */
+.layout{margin-top:28px;display:grid;grid-template-columns:3fr 2fr;gap:20px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}
+.card{background:var(--card-bg);border:1px solid var(--border);
+  padding:18px;border-radius:var(--radius)}
+
+.day-list{display:flex;flex-direction:column;gap:12px}
+.day-card{display:flex;gap:14px;padding:12px 14px;border-radius:var(--radius);
+  background:#111;border:1px solid #222}
+
+.day-title{font-weight:600}
+.day-ref-row{display:flex;gap:6px;align-items:center;font-size:13px}
+.day-ref-label{padding:2px 8px;border-radius:999px;
+  border:1px solid rgba(212,175,55,.4);color:var(--gold);font-size:11px}
+
+.ref-link-text{background:none;border:none;color:var(--text);cursor:pointer}
+.ref-link-text:hover{color:var(--gold);text-decoration:underline}
+
+.btn-small{padding:6px 12px;border-radius:999px;
+  border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer}
+.btn-small.is-done{background:var(--gold);color:#000}
+
+.progress-bar{height:12px;background:#333;border-radius:999px;border:1px solid #555}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),#f0d98a)}
+
+.about-card,.journal-card{background:var(--card-bg);border:1px solid var(--border);
+  padding:20px;border-radius:var(--radius)}
+
+footer{text-align:center;margin-top:30px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<div class="header-actions">
+  <button id="lang-toggle" class="header-btn">DE</button>
+  <button id="play-music" class="header-btn">▶ Musik</button>
+</div>
+
+<h1>31 Hari Bersama Yesus</h1>
+<p class="subtitle">Rencana Bacaan Alkitab – Januari 2025</p>
+
+<div class="intro-card">
+Luangkan waktu <strong>10–20 menit setiap hari</strong> untuk membaca, merenungkan,
+dan berdoa. Biarlah firman Tuhan menuntun langkahmu setiap hari.
+</div>
+
+<nav class="main-nav">
+  <button class="nav-tab is-active" data-tab="lesenplan">📖 Rencana Bacaan</button>
+  <button class="nav-tab" data-tab="about">👤 Tentang Saya</button>
+  <button class="nav-tab" data-tab="journal">📝 Jurnal</button>
+</nav>
+
+<div id="tab-lesenplan" class="tab-section active">
+  <div class="layout">
+    <section class="card">
+      <h2>Pilih Hari</h2>
+      <div id="dayList" class="day-list"></div>
+    </section>
+
+    <aside class="card">
+      <h2>Kemajuanmu</h2>
+      <p id="progressText">0 dari 31 hari selesai (0%).</p>
+      <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">
+        Bacaan Alkitab akan terbuka melalui aplikasi YouVersion Bible.
+      </p>
+    </aside>
+  </div>
+</div>
+
+<div id="tab-about" class="tab-section">
+  <div class="about-card">
+    <h2 style="color:var(--gold)">Tentang Saya</h2>
+    <p>
+      Saya Gabriella, tinggal di Austria dan adalah pengikut Yesus Kristus.
+      Rencana bacaan ini terinspirasi dari Bibelleseplan tahunan Die Gideons,
+      dan dibuat dengan kerinduan agar semakin banyak orang tekun membaca firman Tuhan.
+    </p>
+  </div>
+</div>
+
+<div id="tab-journal" class="tab-section">
+  <div class="journal-card">
+    <h2 style="color:var(--gold)">Jurnal & Doa</h2>
+    <textarea style="width:100%;min-height:180px;background:#111;color:#fff"
+      placeholder="Apa yang Tuhan sampaikan kepadamu hari ini?"></textarea>
+  </div>
+</div>
+
+<footer>Dibuat dengan kasih oleh Gabriella</footer>
+</div>
+
+<audio id="player" src="ambient-worship-music-112199.mp3"></audio>
+
+<script>
+/* RENCANA JANUARI – VERSI INDONESIA */
+const plan = [
+{d:1,m:"Kejadian 1–2",e:"Matius 1"},
+{d:2,m:"Kejadian 3–5",e:"Matius 2"},
+{d:3,m:"Kejadian 6–8",e:"Matius 3"},
+{d:4,m:"Kejadian 9–11",e:"Matius 4"},
+{d:5,m:"Kejadian 12–14",e:"Matius 5:1–26"},
+{d:6,m:"Kejadian 15–17",e:"Matius 5:27–48"},
+{d:7,m:"Kejadian 18–19",e:"Matius 6"},
+{d:8,m:"Kejadian 20–22",e:"Matius 7"},
+{d:9,m:"Kejadian 23–24",e:"Matius 8"},
+{d:10,m:"Kejadian 25–26",e:"Matius 9:1–17"},
+{d:11,m:"Kejadian 27–28",e:"Matius 9:18–38"},
+{d:12,m:"Kejadian 29–30",e:"Matius 10:1–23"},
+{d:13,m:"Kejadian 31–32",e:"Matius 10:24–42"},
+{d:14,m:"Kejadian 33–35",e:"Matius 11"},
+{d:15,m:"Kejadian 36–37",e:"Matius 12:1–21"},
+{d:16,m:"Kejadian 38–40",e:"Matius 12:22–50"},
+{d:17,m:"Kejadian 41",e:"Matius 13:1–32"},
+{d:18,m:"Kejadian 42–43",e:"Matius 13:33–58"},
+{d:19,m:"Kejadian 44–45",e:"Matius 14:1–21"},
+{d:20,m:"Kejadian 46–48",e:"Matius 14:22–36"},
+{d:21,m:"Kejadian 49–50",e:"Matius 15:1–20"},
+{d:22,m:"Keluaran 1–3",e:"Matius 15:21–39"},
+{d:23,m:"Keluaran 4–6",e:"Matius 16"},
+{d:24,m:"Keluaran 7–8",e:"Matius 17"},
+{d:25,m:"Keluaran 9–10",e:"Matius 18:1–20"},
+{d:26,m:"Keluaran 11–12",e:"Matius 18:21–35"},
+{d:27,m:"Keluaran 13–15",e:"Matius 19:1–15"},
+{d:28,m:"Keluaran 16–18",e:"Matius 19:16–30"},
+{d:29,m:"Keluaran 19–21",e:"Matius 20:1–16"},
+{d:30,m:"Keluaran 22–24",e:"Matius 20:17–34"},
+{d:31,m:"Keluaran 25–26",e:"Matius 21:1–22"},
+];
+
+const list=document.getElementById("dayList");
+plan.forEach(p=>{
+  const d=document.createElement("div");
+  d.className="day-card";
+  d.innerHTML=`
+    <div style="flex:1">
+      <div class="day-title">Hari ${p.d}</div>
+      <div class="day-ref-row"><span class="day-ref-label">Pagi</span>
+        <span>${p.m}</span></div>
+      <div class="day-ref-row"><span class="day-ref-label">Malam</span>
+        <span>${p.e}</span></div>
+    </div>`;
+  list.appendChild(d);
+});
+
+/* TAB SWITCH */
+document.querySelectorAll(".nav-tab").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelector(".nav-tab.is-active").classList.remove("is-active");
+    b.classList.add("is-active");
+    document.querySelector(".tab-section.active").classList.remove("active");
+    document.getElementById("tab-"+b.dataset.tab).classList.add("active");
+  }
+});
+
+/* LANGUAGE SWITCH */
+document.getElementById("lang-toggle").onclick=()=>{
+  window.location.href="januar-2025.html";
+};
+
+/* MUSIC */
+const player=document.getElementById("player");
+document.getElementById("play-music").onclick=()=>{
+  player.paused?player.play():player.pause();
+};
+</script>
+
+</body>
+</html>
